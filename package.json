@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.3",
+    "react-json-view": "^1.21.3"
+  }
+}

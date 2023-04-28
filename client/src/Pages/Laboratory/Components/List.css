@@ -1,0 +1,58 @@
+.list {
+    background-color: #fffefe;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .list-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .list-header-checkbox {
+    width: 20px;
+  }
+  
+  .list-header-name {
+    flex: 1;
+  }
+  
+  .list-header-date {
+    width: 100px;
+  }
+  
+  .list-header-price {
+    width: 100px;
+  }
+  
+  .list-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .list-item-checkbox {
+    width: 20px;
+  }
+  
+  .list-item-name {
+    flex: 1;
+  }
+  
+  .list-item-date {
+    width: 100px;
+  }
+  
+  .list-item-price {
+    width: 100px;
+    margin-block: 10px;
+    }
+  
+  input[type="checkbox"] {
+    margin: 0;
+    vertical-align: middle;
+  }
+  

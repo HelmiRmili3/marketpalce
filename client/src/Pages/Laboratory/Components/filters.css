@@ -1,0 +1,53 @@
+.range-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .date-range,
+  .name-range,
+  .price-range {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .date-range input[type="date"],
+  .name-range input[type="text"],
+  .price-range input[type="number"] {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100px;
+  }
+  .date-range label,
+  .name-range label,
+  .price-range label {
+    padding: 5px;
+    width: 75px;
+  }
+
+  
+  .date-range-end {
+    margin-left: 10px;
+  }
+  
+  .reset-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reset-button:hover {
+    background-color: #ccc;
+  }
+  
