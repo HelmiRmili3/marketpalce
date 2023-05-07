@@ -3,7 +3,7 @@ import "./grid.css";
 import Popup from "../Pages/Patient/Components/Popup";
 import { useNftDatabase } from "../Contexts/NFTdatabase";
 export default function Grid() {
-  const {ownedNfts } = useNftDatabase();
+  const { ownedNfts } = useNftDatabase();
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupdata, setPopUpData] = useState();
 
@@ -33,10 +33,10 @@ export default function Grid() {
   }
   return (
     <>
-      <div class="nft-grid">
+      <div className="nft-grid">
         {ownedNfts.map((data) => (
           <div
-            class="nft-card"
+            className="nft-card"
             key={data[0]}
             onClick={() => {
               setPopUpData(data);

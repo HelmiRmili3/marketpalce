@@ -23,8 +23,14 @@ export const NftDatabaseProvider = ({ children }) => {
   const [blocked, setblocked] = useState();
 
   const addBuyRequest = async (tokenID) => {
+    const options = {
+      from: address,
+      gas: 1000000,
+    };
     try {
-      let responce = await contract.methods.addBuyRequest(tokenID);
+      let responce = await contract.methods
+        .addBuyRequest(tokenID)
+        .send(options);
       console.log(responce);
     } catch (error) {
       console.log(error);
@@ -86,7 +92,7 @@ export const NftDatabaseProvider = ({ children }) => {
       setAllNfts(newNfts);
       if (newNfts.length > 0) {
         const nfts = newNfts.filter((nft) => {
-          if (nft.owner == address) {
+          if (nft.owner === address) {
             return true;
           }
           if (nft.buyers.includes(address)) {
@@ -101,14 +107,19 @@ export const NftDatabaseProvider = ({ children }) => {
   };
 
   const getBuyRequests = async () => {
-    try {
-      const response = await contract.methods.getBuyRequests().call();
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    let responses = [];
+    for (let index = 0; index < 2; index++) {
+      try {
+        const response = await contract.methods
+          ._buyRequests("0x1bA058F6141DFC9224E656544bf54F9869Fd889e", index)
+          .call();
+        responses.push(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    setBuyRequest(responses);
   };
-
   const tokenIdCounter = async () => {
     try {
       const response = await contract.methods._tokenIdCounter().call();
@@ -120,12 +131,14 @@ export const NftDatabaseProvider = ({ children }) => {
 
   useEffect(() => {
     getMedicalData();
+    getBuyRequests();
   }, [address]);
   return (
     <NftDatabaseContext.Provider
       value={{
         allNfts,
         ownedNfts,
+        buyRequest,
         addBuyRequest,
         mint,
         approveBuyRequest,

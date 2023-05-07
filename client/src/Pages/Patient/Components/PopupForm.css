@@ -8,6 +8,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
+    font-family: 'Courier New', Courier, monospace;
   }
   
   .form-container form {
@@ -21,6 +22,7 @@
   .form-container h2 {
     font-size: 18px;
     margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
   }
   
   .form-container select,
@@ -64,6 +66,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
   }
   
   .open-form-button:hover {

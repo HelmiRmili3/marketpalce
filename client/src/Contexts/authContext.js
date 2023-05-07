@@ -8,7 +8,6 @@ const contractAddress = "0x7d48dD8D37ef62cbda4A01Ac2F3dcE61f134274F";
 const contract = new web3.eth.Contract(contractAbi.abi, contractAddress);
 
 const AuthContext = createContext();
-
 export function useAuth() {
   return useContext(AuthContext);
 }

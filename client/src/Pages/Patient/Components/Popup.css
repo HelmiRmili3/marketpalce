@@ -10,11 +10,12 @@
     align-items: center;
     z-index: 9999;
     overflow: auto;
+    font-family: 'Courier New', Courier, monospace;
   }
   
   .popup-inner {
     width: 60%;
-    height: 80%;
+    height: 60%;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -37,5 +38,6 @@
     border-radius: 5px;
     padding: 5px;
     border: 1px black solid;
+    font-family: 'Courier New', Courier, monospace;
   }
   

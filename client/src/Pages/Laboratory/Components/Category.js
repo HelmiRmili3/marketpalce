@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./List.css";
+import "./category.css";
 
-const List = ({ items }) => {
+const Category = ({ items }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
@@ -38,11 +38,10 @@ const List = ({ items }) => {
             onChange={handleSelectAll}
           />
         </div>
-        <div className="list-header-name">Address</div>
-
-        <div className="list-header-price">Electrolytes</div>
-        <div className="list-header-price">Glucose</div>
-        <div className="list-header-price">Cholesterol</div>
+        <div className="list-header-owner">Patients</div>
+        <div className="list-header-item">Electrolytes</div>
+        <div className="list-header-item">Glucose</div>
+        <div className="list-header-item">Cholesterol</div>
       </div>
       {
         <div>
@@ -57,20 +56,19 @@ const List = ({ items }) => {
                   onChange={() => handleSelectItem(key)}
                 />
               </div>
-              <div className="list-item-name">{key}</div>
+              <div className="list-item-owner">{key}</div>
               {Object.keys(items[key]).map((innerKey, value) => (
-                <div key={innerKey} className="list-item-price">
+                <div key={innerKey} className="list-item">
                   {items[key][innerKey].length === 0 ? (
                     <div
-                    style={{
-                      border:"1px solid green",
-                      borderRadius: "50px",
-                      width: "10px",
-                      height: "10px",
-                      marginLeft:"40px"
-                    
-                    }}
-                  ></div>
+                      style={{
+                        border: "1px solid green",
+                        borderRadius: "50px",
+                        width: "10px",
+                        height: "10px",
+                        marginLeft: "40px",
+                      }}
+                    ></div>
                   ) : (
                     <div
                       style={{
@@ -78,8 +76,7 @@ const List = ({ items }) => {
                         borderRadius: "50px",
                         width: "12px",
                         height: "12px",
-                        marginLeft:"40px"
-                      
+                        marginLeft: "40px",
                       }}
                     ></div>
                   )}
@@ -88,24 +85,6 @@ const List = ({ items }) => {
             </div>
           ))}
         </div>
-
-        // <>
-        //   <div key={item.id} className="list-item">
-
-        //     <div className="list-item-name">{item.id}</div>
-        //     <div className="list-item-price">
-        //       {item.Electrolytes == [] ? "X" : ""}
-        //     </div>
-        //     <div className="list-item-price">
-        //       {item.Glucose == [] ? "X" : ""}
-        //     </div>
-        //     <div className="list-item-price">
-        //       {item.Cholesterol == [] ? "X" : ""}
-        //     </div>
-        //     <div className="list-item-date">{item.date}</div>
-        //     <div className="list-item-price">{item.price}</div>
-        //   </div>
-        // </>
       }
     </div>
   ) : (
@@ -113,4 +92,4 @@ const List = ({ items }) => {
   );
 };
 
-export default List;
+export default Category;

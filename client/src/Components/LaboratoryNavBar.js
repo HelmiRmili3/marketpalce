@@ -1,8 +1,8 @@
+import React from "react";
 import "../App.css";
- import { useMatch, useResolvedPath, Link } from "react-router-dom";
-import { useAuth } from "../Contexts/authContext";
-import React, { useState } from 'react';
 
+import { useMatch, useResolvedPath, Link } from "react-router-dom";
+import { useAuth } from "../Contexts/authContext";
 
 export default function LaboratoryNavBar() {
   const { logOut, setIsLoggedIn } = useAuth();
@@ -17,8 +17,10 @@ export default function LaboratoryNavBar() {
         Laboratory
       </div>
       <ul className="navbar__links">
-        <CustomLink to="#">All NFTs</CustomLink>
-        <CustomLink to="#">My NFTs</CustomLink>
+        <CustomLink to="/users/laboratory">Profile</CustomLink>
+        <CustomLink to="/users/laboratory/nfts">NFTs</CustomLink>
+        <CustomLink to="/users/laboratory/purchased">Purchased</CustomLink>
+        <CustomLink to="/users/laboratory/requests">Orders</CustomLink>
       </ul>
       <button className="navbar__logout" onClick={HandeleLogout}>
         Logout

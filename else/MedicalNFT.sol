@@ -1,237 +1,227 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract MedicalNFT is ERC721 ,Ownable {
-    uint256 public _tokenIdCounter;
-    uint256 public _buyRequestsCounter;
-    uint256 public _blockedCounter;
-
-    mapping(uint256 => MedicalData) private _tokenData;
-    mapping(address => BuyRequest[]) private _buyRequests;
-    mapping(uint256 => Patient) public _blocked;
-
-    struct Patient {
-        address _address;
-        bool _isblocked;
+contract MedicalNFT is ERC721, Ownable {
+    uint256 public _NftsCounter;
+    uint256 public _RequestsCounter;
+    struct User {
+        address wallet;
+        uint256 requests;
+        uint256 nft;
+        uint256 collection;
+        bool enable;
     }
-
-    struct MedicalData {
-        uint256 tokenId;
+    struct NFT {
+        uint256 id;
         string name;
         address owner;
         uint256 date;
         uint256 price;
         string data;
         address[] buyers;
-        uint256 period;
     }
-
-    struct BuyRequest {
-        address buyer;
-        address owner;
-        uint256 tokenId;
+    struct Request {
+        string collection;
+        uint256 id;
+        uint256[] ids;
         uint256 date;
-        bool isCompleted;
-        bool isAccepted;
+        uint256 price;
+        address buyer;
+        address seller;
+        bool isSeenBySeller;
+        bool isAcceptedBySeller;
+        bool isSeenByBuyer;
+        bool isPayedByBuyer;
     }
-
-
+    struct LabRequest {
+        string name;
+        address owner;
+        uint256[] nfts;
+    }
+    mapping(uint256 => NFT) private NFTs;
+    mapping(address => User) public Users;
+    mapping(address => uint256[]) public UsersNfts;
+    mapping(address => mapping(uint256 => Request)) public Requests;
+    mapping(address => mapping(string => uint256[])) public UsersCollections;
 
     constructor() ERC721("MedicalNFT", "MED") {}
 
-
     function toggleBlock(address _patient) public onlyOwner {
-         for (uint256 i = 0; i < _blockedCounter; i++){
-             if(_blocked[i]._address == _patient){
-                 _blocked[i]._isblocked = !_blocked[i]._isblocked;
-             }
-         }
+        Users[_patient].enable = !Users[_patient].enable;
     }
 
-    function _isblocked(address _patient) private view returns (bool) {
-        for (uint256 i = 0; i < _blockedCounter; i++) {
-            if (
-                _blocked[i]._address == _patient &&
-                _blocked[i]._isblocked == true
-            ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function _isBuyer(uint256 _tokenId, address _buyer)
-        private
-        view
-        returns (bool)
-    {
-        for (uint256 i = 0; i < _tokenData[_tokenId].buyers.length; i++) {
-            if (_tokenData[_tokenId].buyers[i] == _buyer) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function _isOwner(uint256 _tokenId, address _owner)
-        private
-        view
-        returns (bool)
-    {
-        if (_tokenData[_tokenId].owner == _owner) {
-            return true;
-        }
-        return false;
-    }
-
-    function _isBuyRequestExists(uint256 _tokenId, address _buyer)
-        private
-        view
-        returns (bool)
-    {
-        address _owner = _tokenData[_tokenId].owner;
-        BuyRequest[] storage requests = _buyRequests[_owner];
-        for (uint256 i = 0; i < requests.length; i++) {
-            if (
-                requests[i].buyer == _buyer &&
-                requests[i].tokenId == _tokenId &&
-                requests[i].isCompleted == false
-            ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function addBuyRequest(uint256 _tokenId) public {
-        require(
-            !_isOwner(_tokenId, msg.sender),
-            "Owner of the NFT cant make request"
-        );
-        require(
-            !_isBuyer(_tokenId, msg.sender),
-            "This nft is Allready been bot"
-        );
-        require(
-            !_isBuyRequestExists(_tokenId, msg.sender),
-            "This request allready exist"
-        );
-        address _owner = _tokenData[_tokenId].owner;
-
-        BuyRequest memory dataStruct = BuyRequest({
-            buyer: msg.sender,
-            owner: _owner,
-            tokenId: _tokenId,
-            date: block.timestamp,
-            isCompleted: false,
-            isAccepted: false
+    function addUser() public {
+        User memory data = User({
+            wallet: msg.sender,
+            requests: 0,
+            nft: 0,
+            collection: 0,
+            enable: true
         });
-
-        _buyRequests[_owner].push(dataStruct);
-        _buyRequestsCounter++;
-    }
-
-    function approveBuyRequest(address _buyer, uint256 _tokenId)
-        public
-        payable
-    {
-        require(
-            _isBuyRequestExists(_tokenId, _buyer),
-            "Buy request does not exist"
-        );
-        for (uint256 i = 0; i < _buyRequests[msg.sender].length; i++) {
-            if (
-                _buyRequests[msg.sender][i].buyer == _buyer &&
-                _buyRequests[msg.sender][i].tokenId == _tokenId
-            ) {
-                _buyRequests[msg.sender][i].isAccepted = true;
-                _buyRequests[msg.sender][i].isCompleted = true;
-                payable(_tokenData[_tokenId].owner).transfer(
-                    _tokenData[_tokenId].price
-                ); // send ETH to owner
-                _tokenData[_tokenId].buyers.push(_buyer);
-                break;
-            }
-        }
-    }
-
-    function rejectBuyRequest(address _buyer, uint256 _tokenId) public {
-        require(
-            _isBuyRequestExists(_tokenId, _buyer),
-            "Buy request does not exist"
-        );
-        for (uint256 i = 0; i < _buyRequests[msg.sender].length; i++) {
-            if (
-                _buyRequests[msg.sender][i].buyer == _buyer &&
-                _buyRequests[msg.sender][i].tokenId == _tokenId
-            ) {
-                _buyRequests[msg.sender][i].isAccepted = false;
-                _buyRequests[msg.sender][i].isCompleted = true;
-                break;
-            }
+        if (Users[msg.sender].enable || !(Users[msg.sender].enable)) {} else {
+            Users[msg.sender] = data;
         }
     }
 
     function mint(
         string memory name,
         uint256 price,
-        string memory data,
-        uint256 period
+        string memory data
     ) public {
-        require(
-            !_isblocked(msg.sender),
-            "This user is blocked for minting nfts"
-        );
-        require(bytes(name).length > 0, "Name cannot be empty");
-        require(bytes(data).length > 0, "Data cannot be empty");
-        require(price > 0, "Price must be greater than zero");
+        require(Users[msg.sender].enable, "You are blocked form minting");
+        require(bytes(name).length > 0, "Name can't be empty");
+        require(bytes(data).length > 0, "Data can't be empty");
 
-        _safeMint(msg.sender, _tokenIdCounter);
+        _safeMint(msg.sender, _NftsCounter);
 
-        MedicalData memory dataStruct = MedicalData({
-            tokenId: _tokenIdCounter,
+        NFT memory dataStruct = NFT({
+            id: _NftsCounter,
             name: name,
             owner: msg.sender,
             date: block.timestamp,
             price: price,
             data: data,
-            buyers: new address[](0),
-            period: period
+            buyers: new address[](0)
         });
-
-        _tokenData[_tokenIdCounter] = dataStruct;
-        _tokenIdCounter++;
-
-
-        Patient memory patientdata = Patient({
-            _address : msg.sender,
-            _isblocked : false 
-        });
-
-        _blocked[_blockedCounter] =  patientdata;
-        _blockedCounter++;
-        
+        // Create new nft and add it to the list of the nfts.
+        NFTs[_NftsCounter] = dataStruct;
+        // Add the nft to the list of the nfts for this patient.
+        UsersNfts[msg.sender].push(_NftsCounter);
+        // add the nft to the collection nft for the user
+        UsersCollections[msg.sender][name].push(_NftsCounter);
+        //increment the nb of nfts for the patient
+        Users[msg.sender].nft++;
+        //increment the count of nfts
+        _NftsCounter++;
     }
 
-    function getTokenData(uint256 tokenId)
+    function addBuyRequest(LabRequest[] memory requests) public {
+        require(Users[msg.sender].enable, "You are blocked form buying nfts");
+        for (uint256 i = 0; i < requests.length; i++) {
+            uint256 buyerCounter = Users[msg.sender].requests;
+            uint256 sellerCounter = Users[msg.sender].requests;
+            uint256 total = 0;
+            for (uint256 j = 0; i < requests[i].nfts.length; j++) {
+                uint256 _price = NFTs[requests[i].nfts[j]].price;
+                total = total + _price;
+            }
+            Request memory dataStruct = Request({
+                collection: requests[i].name,
+                id: _RequestsCounter,
+                ids: requests[i].nfts,
+                date: block.timestamp,
+                buyer: msg.sender,
+                price: total,
+                seller: requests[i].owner,
+                isSeenBySeller: false,
+                isAcceptedBySeller: false,
+                isSeenByBuyer: false,
+                isPayedByBuyer: false
+            });
+            Requests[msg.sender][buyerCounter] = dataStruct;
+            Requests[requests[i].owner][sellerCounter] = dataStruct;
+            Users[msg.sender].requests++;
+            _RequestsCounter++;
+        }
+    }
+
+    function approveBuyRequest(uint256 _id, bool accepted) public {
+        require(
+            Requests[msg.sender][_id].isAcceptedBySeller != true,
+            "This request allready done"
+        );
+        address _buyer = Requests[msg.sender][_id].buyer;
+        Requests[msg.sender][_id].isSeenBySeller = true;
+        Requests[msg.sender][_id].isAcceptedBySeller = accepted;
+        Requests[_buyer][_id].isSeenBySeller = true;
+        Requests[_buyer][_id].isAcceptedBySeller = accepted;
+    }
+
+    function acceptPayment(uint256 _id) public payable {
+        require(
+            Requests[msg.sender][_id].isAcceptedBySeller == true,
+            "This request allready rejected"
+        );
+        //get the seller address
+        address _seller = Requests[msg.sender][_id].seller;
+        //get the buyer category
+        string memory collection = Requests[msg.sender][_id].collection;
+        //send the payment amount to the seller
+        payable(_seller).transfer(Requests[msg.sender][_id].price);
+
+        // set the filds to true for the seller and the buyer
+        Requests[msg.sender][_id].isSeenByBuyer = true;
+        Requests[msg.sender][_id].isPayedByBuyer = true;
+        Requests[_seller][_id].isSeenByBuyer = true;
+        Requests[_seller][_id].isPayedByBuyer = true;
+        uint256[] memory list = Requests[msg.sender][_id].ids;
+        for (uint256 i = 0; i < list.length; i++) {
+            // add the nfts to the collection of the nfts
+            UsersCollections[msg.sender][collection].push(list[i]);
+            UsersNfts[msg.sender].push(list[i]);
+            Users[msg.sender].nft++;
+            NFTs[list[i]].buyers.push(msg.sender);
+        }
+    }
+
+    function rejectPayment(uint256 _id) public {
+        require(
+            Requests[msg.sender][_id].isAcceptedBySeller == true,
+            "This request allready rejected"
+        );
+        address _seller = Requests[msg.sender][_id].seller;
+        Requests[msg.sender][_id].isSeenByBuyer = true;
+        Requests[msg.sender][_id].isPayedByBuyer = false;
+        Requests[_seller][_id].isSeenByBuyer = true;
+        Requests[_seller][_id].isPayedByBuyer = false;
+    }
+
+    function getNftData(uint256[] memory _ids)
         public
         view
-        returns (MedicalData memory)
+        returns (NFT[] memory)
     {
-        require(_exists(tokenId), "Token does not exist");
-        return _tokenData[tokenId];
+        NFT[] memory result = new NFT[](_ids.length);
+        for (uint256 j = 0; j < _ids.length; j++) {
+            for (uint256 i = 0; i < _NftsCounter; i++) {
+                if (i == _ids[j]) {
+                    NFT memory data = NFT({
+                        id: NFTs[i].id,
+                        name: NFTs[i].name,
+                        owner: NFTs[i].owner,
+                        date: NFTs[i].date,
+                        price: NFTs[i].price,
+                        data: NFTs[i].data,
+                        buyers: NFTs[i].buyers
+                    });
+                    result[j] = data;
+                }
+            }
+        }
+        return result;
     }
 
-    function getBuyRequests() public view returns (BuyRequest[] memory) {
-        BuyRequest[] memory requests = new BuyRequest[](0);
-        if (_buyRequests[msg.sender].length > 0) {
-            requests = _buyRequests[msg.sender];
-            return requests;
-        } else {
-            return requests;
+    function getNFTs(uint256[] memory _ids) public view returns (NFT[] memory) {
+        uint256 l = _NftsCounter - _ids.length;
+        NFT[] memory result = new NFT[](l);
+        for (uint256 j = 0; j < _ids.length; j++) {
+            for (uint256 i = 0; i < _NftsCounter; i++) {
+                if (i != _ids[j]) {
+                    NFT memory data = NFT({
+                        id: NFTs[i].id,
+                        name: NFTs[i].name,
+                        owner: NFTs[i].owner,
+                        date: NFTs[i].date,
+                        price: NFTs[i].price,
+                        data: "",
+                        buyers: NFTs[i].buyers
+                    });
+                    result[j] = data;
+                }
+            }
         }
+        return result;
     }
 }

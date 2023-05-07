@@ -1,14 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../App.css";
-import { useMatch, useResolvedPath } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import { useMatch, useResolvedPath } from "react-router-dom";
 import { useAuth } from "../Contexts/authContext";
-//import { useNavigate } from "react-router-dom";
+
 export default function PatientNavBar() {
   const { logOut, setIsLoggedIn } = useAuth();
-
-  //   const navigate = useNavigate();
   const HandeleLogout = () => {
     logOut();
     setIsLoggedIn(false);
@@ -22,7 +20,6 @@ export default function PatientNavBar() {
         <CustomLink to="/users/patient/profile">Profile</CustomLink>
         <CustomLink to="/users/patient/collections">Collections</CustomLink>
         <CustomLink to="/users/patient/settings">Settings</CustomLink>
-        <CustomLink to="/users/patient/create">Create NFT</CustomLink>
       </ul>
       <button className="navbar__logout" onClick={HandeleLogout}>
         Logout
