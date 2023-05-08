@@ -2,13 +2,46 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNftDatabase } from "./NFTdatabase";
 import { useWallet } from "./walletContext";
 
+import Web3 from "web3";
+import { useWallet } from "./walletContext";
+const web3 = new Web3("http://localhost:7545");
+const contractAbi = require("../MedicalDataNFT.json");
+const contractAddress = "0x9CE8072BB397F1EF4Ae6344DA57B521EE784d5F7";
+const contract = new web3.eth.Contract(contractAbi.abi, contractAddress);
+
 const LaboContext = createContext();
 export function useLabo() {
   return useContext(LaboContext);
 }
 
 export const LaboProvider = ({ children }) => {
-  const { allNfts } = useNftDatabase();
+  const [nfts, setNfts] = useState();
+  //get all nfts for all users and filter the the owned one out
+  const getAllNfts = () => {
+    try {
+      contract.methods
+        ._NftsCounter()
+        .call()
+        .then((counter) => {
+          try {
+            contract.methods.getNftData().call.then((response) => {
+              setNfts(response);
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //get all nfts for this user
+
+  //get all categorys for this user
+
+  //Add buy function that take list of Lab Reqests
+
+  const { Nfts } = useNftDatabase();
   const { address } = useWallet();
 
   const [notOwnedList, setNotOwnedList] = useState([]);
