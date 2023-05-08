@@ -2,11 +2,11 @@ import React, { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
 
 import Web3 from "web3";
-// import { useAuth } from "../contexts/authContext";
 import { useWallet } from "./walletContext";
 const web3 = new Web3("http://localhost:7545");
-const contractAbi = require("../MedicalNFT.json");
-const contractAddress = "0xf31c9355B96385E66aBB55fEb527D0E378dc3E6c";
+const contractAbi = require("../MedicalDataNFT.json");
+//const contractAddress = "0xf31c9355B96385E66aBB55fEb527D0E378dc3E6c";
+const contractAddress = "0x9CE8072BB397F1EF4Ae6344DA57B521EE784d5F7";
 const contract = new web3.eth.Contract(contractAbi.abi, contractAddress);
 
 const NftDatabaseContext = createContext();
