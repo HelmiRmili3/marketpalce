@@ -4,34 +4,33 @@ import Web3 from "web3";
 import { useLabo } from "../../../Contexts/laboContext";
 const web3 = new Web3("http://localhost:7545");
 export default function Items({ items }) {
-  const { setToBuyList, price, setPrice } = useLabo();
+  const {} = useLabo();
   const [selectedItems, setSelectedItems] = useState([]);
   const handleSelectAll = (e) => {
     if (e.target.checked) {
       setSelectedItems(items.map((item) => item.tokenId));
-      setPrice(items.map((p) => p.price).reduce((acc, cur) => parseInt(acc) +  parseInt(cur), 0));
+      // setPrice(
+      //   items
+      //     .map((p) => p.price)
+      //     .reduce((acc, cur) => parseInt(acc) + parseInt(cur), 0)
+      // );
     } else {
       setSelectedItems([]);
-      setPrice(0);
+     // setPrice(0);
     }
-
   };
   const handleSelect = (e, _tokenId, _price) => {
     if (e.target.checked) {
       setSelectedItems([...selectedItems, _tokenId]);
-      setPrice(parseInt(price) + parseInt(_price));
+      //setPrice(parseInt(price) + parseInt(_price));
     } else {
       setSelectedItems(selectedItems.filter((id) => id !== _tokenId));
-      setPrice(parseInt(price) - parseInt(_price));
+      //setPrice(parseInt(price) - parseInt(_price));
     }
-
   };
-
-
-
-  useEffect(() => {
-    setToBuyList(selectedItems);
-  }, [selectedItems]);
+  // useEffect(() => {
+  //   setToBuyList(selectedItems);
+  // }, [selectedItems]);
   return (
     <>
       <div className="list">
@@ -39,7 +38,7 @@ export default function Items({ items }) {
           <div className="list-header-checkbox">
             <input
               type="checkbox"
-              checked={selectedItems.length === items.length}
+              checked={selectedItems.length === items?.length}
               onChange={handleSelectAll}
             />
           </div>
@@ -51,12 +50,12 @@ export default function Items({ items }) {
           const itemDate = new Date(nft.date * 1000);
           const nftPrice = web3.utils.fromWei(nft.price, "ether");
           return (
-            <div className="list-item" key={nft.tokenId}>
+            <div className="list-item" key={nft.id}>
               <div className="list-item-checkbox">
                 <input
                   type="checkbox"
-                  checked={selectedItems.includes(nft.tokenId)}
-                  onChange={(e) => handleSelect(e, nft.tokenId,nft.price)}
+                  checked={selectedItems.includes(nft.id)}
+                  onChange={(e) => handleSelect(e, nft.id, nft.price)}
                 />
               </div>
               <div className="list-item-name">{nft.name}</div>
