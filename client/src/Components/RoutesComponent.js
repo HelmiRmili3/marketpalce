@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import { LaboProvider } from "../Contexts/laboContext";
+import { AdminProvider } from "../Contexts/adminContext";
+import { PatientProvider } from "../Contexts/patientContext";
 
 import RequireAuth from "./RequireAuth";
 import Login from "./logInForm";
@@ -22,6 +25,7 @@ import Purchased from "../Pages/Laboratory/Components/purchased";
 import Requests from "../Pages/Laboratory/Components/requests";
 import Nfts from "../Pages/Laboratory/Components/nfts";
 import Card from "../Pages/Laboratory/Components/profile";
+
 export default function RoutesComponent() {
   return (
     <>
@@ -30,7 +34,14 @@ export default function RoutesComponent() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUpForm />}></Route>
         <Route element={<RequireAuth />}>
-          <Route path="/users/patient/" element={<PatientPage />}>
+          <Route
+            path="/users/patient/"
+            element={
+              <PatientProvider>
+                <PatientPage />
+              </PatientProvider>
+            }
+          >
             <Route path="profile" element={<Profile />} />
             <Route path="collections" element={<Collections />} />
             <Route path="settings" element={<div>Settings</div>} />
@@ -43,13 +54,21 @@ export default function RoutesComponent() {
               </LaboProvider>
             }
           >
-            <Route exact path="" element={<Card/>} />
-            <Route path="profile" element={<Card/>} />
+            <Route exact path="" element={<Card />} />
+            <Route path="profile" element={<Card />} />
             <Route path="nfts" element={<Nfts />} />
             <Route path="purchased" element={<Purchased />} />
             <Route path="requests" element={<Requests />} />
           </Route>
-          <Route path="/users/admin/" element={<Admin />}>
+          <Route
+            path="/users/admin/"
+            element={
+              <AdminProvider>
+                <Admin />
+              </AdminProvider>
+            }
+          >
+            <Route path="profile" element={<div>Profile</div>} />
             <Route path="patients-list" element={<Patients />} />
             <Route path="laboratorys-list" element={<Laboratorys />} />
             <Route path="admins-list" element={<Admins />} />

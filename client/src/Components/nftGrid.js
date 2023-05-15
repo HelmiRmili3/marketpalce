@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./grid.css";
 import Popup from "../Pages/Patient/Components/Popup";
-import { useNftDatabase } from "../Contexts/NFTdatabase";
+import { usePatient } from "../Contexts/patientContext";
 export default function Grid() {
-  const { ownedNfts } = useNftDatabase();
+  const { nfts } = usePatient();
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupdata, setPopUpData] = useState();
 
@@ -34,25 +34,25 @@ export default function Grid() {
   return (
     <>
       <div className="nft-grid">
-        {ownedNfts.map((data) => (
+        {nfts.map((nft) => (
           <div
             className="nft-card"
-            key={data[0]}
+            key={nft.id}
             onClick={() => {
-              setPopUpData(data);
+              setPopUpData(nft);
               handleButtonClick();
             }}
           >
-            <img src={photopicker(data.name)} alt="" />
-            <h3>{data.name}</h3>
-            <p>Created :{timeConvert(data.date)}</p>
+            <img src={photopicker(nft.name)} alt="" />
+            <h3>{nft.name}</h3>
+            <p>Created :{timeConvert(nft.date)}</p>
           </div>
         ))}
       </div>
       <Popup
         visible={popupVisible}
-        message={popupdata ? popupdata[5] : ""}
-        header={popupdata ? popupdata[1] : ""}
+        message={popupdata ? popupdata.data : ""}
+        header={popupdata ? popupdata.name : ""}
         onClose={handlePopupClose}
       />
     </>

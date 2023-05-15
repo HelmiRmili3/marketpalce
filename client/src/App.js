@@ -4,7 +4,7 @@ import Nav from "./Components/Nav";
 import RoutesComponent from "./Components/RoutesComponent";
 import "./App.css";
 export default function App() {
-  return (
+    return (
     <BrowserRouter>
       <Nav />
       <RoutesComponent />

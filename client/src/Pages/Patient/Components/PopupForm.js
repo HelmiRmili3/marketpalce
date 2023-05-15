@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./PopupForm.css";
 
 import { useNftDatabase } from "../../../Contexts/NFTdatabase";
+import { usePatient } from "../../../Contexts/patientContext";
 const PopupForm = () => {
-  const { mint } = useNftDatabase();
+  const { createNft, patient } = usePatient();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("Electrolytes");
   const [price, setPrice] = useState("");
@@ -13,15 +14,16 @@ const PopupForm = () => {
   const handleOpenForm = () => {
     setIsOpen(true);
   };
-
   const handleCloseForm = () => {
     setIsOpen(false);
   };
-
-  const handleFormSubmit =  (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-     mint(name, price, data, period );
-    console.log({ name, price, data, period });
+    createNft(name, price, data, patient.birthday, patient.sexe);
+    setIsOpen(false);
+    setPrice("");
+    setData("");
+
   };
 
   return (
@@ -69,7 +71,9 @@ const PopupForm = () => {
             </select>
             <label htmlFor="file">File:</label>
             <input type="file" id="file" name="file" onChange={() => {}} />
-            <button type="submit" onClick={handleFormSubmit}>Submit</button>
+            <button type="submit" onClick={handleFormSubmit}>
+              Submit
+            </button>
           </form>
 
           <button className="close-form-button" onClick={handleCloseForm}>

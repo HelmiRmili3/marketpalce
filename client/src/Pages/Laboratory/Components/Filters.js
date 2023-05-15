@@ -51,39 +51,6 @@ export default function Filters({ visible, onClose }) {
     setPriceRange({ minPrice: minPrice, maxPrice: maxPrice });
   };
   const updateItems = () => {
-    // Filter the owners based on the selected fields
-    // console.log(filterdBycategory);
-    // if (filterdBycategory) {
-    //   setFilteredOwners(
-    //     Object.keys(filterdBycategory).filter((owner) => {
-    //       // Check if all selected fields have at least one value in the owner object
-    //       let valid1 = false;
-    //       let valid2 = false;
-    //       let valid3 = false;
-    //       if (isChecked1 && filterdBycategory[owner].Electrolytes.length > 0) {
-    //         valid1 = true;
-    //       }
-    //       if (isChecked2 && filterdBycategory[owner].Glucose.length > 0) {
-    //         valid2 = true;
-    //       }
-    //       if (isChecked3 && filterdBycategory[owner].Cholesterol.length > 0) {
-    //         valid3 = true;
-    //       }
-    //       if (
-    //         isChecked1 === valid1 &&
-    //         isChecked2 === valid2 &&
-    //         isChecked3 === valid3
-    //       ) {
-    //         return true;
-    //       }
-    //       return false;
-    //     })
-    //   );
-    // }
-
-    // // let f = notOwnedList.filter((nft) => filteredOwners.includes(nft.owner));
-    // // setFiltrednfts(f);
-    // // console.log(f);
     const filtrednfts = notOwnedList?.filter((item) => {
       const itemDate = new Date(item.date * 1000);
       const itemPrice = web3.utils.fromWei(item.price, "ether");

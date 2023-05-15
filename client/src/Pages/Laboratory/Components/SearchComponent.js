@@ -3,9 +3,9 @@ import "./SearchComponent.css";
 import Filters from "./filters";
 import { useLabo } from "../../../Contexts/laboContext";
 const SearchComponent = ({ toggalMode, mode }) => {
-  const { setFiltred, Category, notOwnedList } = useLabo();
-  const [searchText, setSearchText] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
+  // const { setFiltred, Category, notOwnedList } = useLabo();
+   const [searchText, setSearchText] = useState("");
+   const [showFilters, setShowFilters] = useState(false);
 
   const handleCloseFilterPopup = () => {
     setShowFilters(false);
@@ -14,16 +14,16 @@ const SearchComponent = ({ toggalMode, mode }) => {
     setShowFilters(true);
   };
 
-  const updateItems = () => {
-    const filteredItems = notOwnedList.filter((item) => {
-      if (searchText != "" && searchText != item.owner) {
-        return false;
-      }
-      return true;
-    });
-    setFiltred(filteredItems);
-    Category(filteredItems);
-  };
+  // const updateItems = () => {
+  //   const filteredItems = notOwnedList.filter((item) => {
+  //     if (searchText != "" && searchText != item.owner) {
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  //   setFiltred(filteredItems);
+  //   Category(filteredItems);
+  // };
   return (
     <div className="search-container">
       <div className="search-field-container">
@@ -31,12 +31,14 @@ const SearchComponent = ({ toggalMode, mode }) => {
           type="text"
           value={searchText}
           onChange={(e) => {
-            setSearchText(e.target.value);
-            console.log(searchText);
+            // setSearchText(e.target.value);
+            // console.log(searchText);
           }}
           placeholder="Patient"
         />
-        <button onClick={updateItems}>Search</button>
+        {/* <button onClick={updateItems}>Search</button> */}
+        <button onClick={()=>{}}>Search</button>
+
       </div>
       <div className="search-container"></div>
       <div className="filters-container">

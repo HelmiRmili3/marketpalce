@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Contexts/authContext";
 import { WalletProvider } from "./Contexts/walletContext";
 import { NftDatabaseProvider } from "./Contexts/NFTdatabase";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

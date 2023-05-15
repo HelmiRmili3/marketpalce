@@ -1,38 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../App.css"
+import "../App.css";
 import { useAuth } from "../Contexts/authContext";
 import { useWallet } from "../Contexts/walletContext";
 
 function Login(props) {
   const [password, setPassword] = useState("");
-  const { logIn, currentUser } = useAuth();
+  const { currentUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const { address } = useWallet();
+  //$2y$10$TLgAqNWEHmVLQKMDZSH3juRA0EgPaQZmjL3J0Sbk1VMharJ.HDy6W
+  //$2y$10$TLgAqNWEHmVLQKMDZSH3juRA0EgPaQZmjL3J0Sbk1VMharJ.HDy6W
   const navigate = useNavigate();
 
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    logIn(password);
-    setPassword("");
-    if (currentUser !== null) {
-      if (currentUser.userState === "0") {
-        navigate("/users/patient/profile");
-      } else {
-        if (currentUser.userState === "1") {
-          navigate("/users/laboratory/");
-        } else {
-          if (currentUser.userState === "2") {
-            navigate("/users/admin/patients-list");
-          }
-        }
-      }
+  // function hashPassword(password) {
+  //   const salt = bcrypt.genSaltSync(10);
+  //   const hash = bcrypt.hashSync(password, salt);
+  //   return hash;
+  // }
+
+  const handleLogin = async () => {
+    if (currentUser.password == password) {
+      setIsLoggedIn(true);
+      const profileUrl = `/users/${currentUser.role}/profile`;
+      navigate(profileUrl);
     } else {
-      console.log("no users found");
+      console.log("No users found");
     }
+    setPassword("");
   };
+
   function limitString(str, maxLength) {
     if (str.length > maxLength) {
       return str.substring(0, maxLength) + "...";
@@ -42,7 +41,7 @@ function Login(props) {
   }
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <h1>Login</h1>
         </div>
@@ -60,7 +59,7 @@ function Login(props) {
           ></input>
         </div>
         <div className="form-group">
-          <button type="submit">Login</button>
+          <button onClick={handleLogin}>Login</button>
         </div>
       </form>
     </div>

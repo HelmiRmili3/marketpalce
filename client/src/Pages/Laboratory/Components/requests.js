@@ -3,28 +3,28 @@ import "./requests.css";
 import { useNftDatabase } from "../../../Contexts/NFTdatabase";
 import { useLabo } from "../../../Contexts/laboContext";
 export default function Requests() {
-  const {setPrice} = useLabo();
-  setPrice(0);
-  const { buyRequest } = useNftDatabase();
-  const [data, setData] = useState([]);
+  // const {setPrice} = useLabo();
+  // setPrice(0);
+  // const { buyRequest } = useNftDatabase();
+   const [data, setData] = useState([]);
   
-  useEffect(() => {
-    if (buyRequest) {
-      let requests = [];
-      buyRequest.forEach((request) => {
-        const responseObject = {
-          buyer: request[0],
-          owner: request[1],
-          id: request[2],
-          date: new Date(request[4] * 1000),
-          isCompleted: request[5],
-          isAccepted: request[6],
-        };
-        requests.push(responseObject);
-      });
-      setData(requests);
-    }
-  }, [buyRequest]);
+  //useEffect(() => {
+  //   if (buyRequest) {
+  //     let requests = [];
+  //     buyRequest.forEach((request) => {
+  //       const responseObject = {
+  //         buyer: request[0],
+  //         owner: request[1],
+  //         id: request[2],
+  //         date: new Date(request[4] * 1000),
+  //         isCompleted: request[5],
+  //         isAccepted: request[6],
+  //       };
+  //       requests.push(responseObject);
+  //     });
+  //     setData(requests);
+  //   }
+  // }, [buyRequest]);
   return data ? (
     <div className="order-list">
       {data.map((order, index) => (

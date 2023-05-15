@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNftDatabase } from "../../../Contexts/NFTdatabase";
 import { useLabo } from "../../../Contexts/laboContext";
 import Category from "./Category";
 import SearchComponent from "./SearchComponent";
@@ -11,9 +10,8 @@ import SuccesAlert from "../../../Components/SuccesAlert";
 const web3 = new Web3("http://localhost:7545");
 
 export default function Nfts() {
-  const { filterdBycategory, filtred, toBuyList, price } = useLabo();
+  const { allNfts } = useLabo();
   const [filterMode, setFilterMode] = useState(false);
-  const { addBuyRequest } = useNftDatabase();
   const [active, setactive] = useState(false);
 
   const handlePurchase = async () => {
@@ -23,7 +21,7 @@ export default function Nfts() {
   const toggleFilterMode = () => {
     setFilterMode(!filterMode);
   };
-  const totalPrice = web3.utils.fromWei(price.toString(), "ether");
+  //const totalPrice = web3.utils.fromWei(price?.toString(), "ether");
 
   return (
     <>
@@ -32,21 +30,20 @@ export default function Nfts() {
         setVisible={setactive}
         timeout="3000"
         title="Alert"
-        message={`Your order has been successfully added to the orders list. Please note that the ${totalPrice} ETH of the order will be deducted from your Wallet. OK`}
+        message={`Your order has been successfully added to the orders list. Please note that the ${0} ETH of the order will be deducted from your Wallet. OK`}
       />
-
       <SearchComponent toggalMode={toggleFilterMode} mode={filterMode} />
-      {filterMode ? (
-        <Category items={filterdBycategory} />
-      ) : (
-        <Items items={filtred} />
-      )}
+      {filterMode ? <></> : <Items items={allNfts} />}
       <Panel
-        itemCount={filtred.length}
-        purchaseItemsCount={toBuyList.length}
-        purchase={handlePurchase}
-        price={totalPrice}
+      // itemCount={filtred.length}
+      // purchaseItemsCount={toBuyList.length}
+      // purchase={handlePurchase}
+      // price={totalPrice}
       />
     </>
   );
 }
+
+// (
+//   <Category items={filterdBycategory} />
+// )
