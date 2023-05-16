@@ -1,0 +1,8 @@
+.empty{
+    background-color: rgb(248, 244, 244);
+    width: 96%;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+}

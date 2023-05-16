@@ -1,16 +1,25 @@
 import React from "react";
-import Web3 from "web3";
-const NFT = ({ nft }) => {
-  const timestamp = 1621184400000; // Replace with your timestamp in milliseconds
+const Web3 = require('web3');
+const web3 = new Web3();
+const NFT = ({ nft,selected,onSelect }) => {
+  const date = new Date(nft.date * 1000);
+  const formattedDate = date.toLocaleDateString();
+  const ethValue = web3.utils.fromWei(nft.price, 'ether');
 
-  const date = new Date(timestamp);
-
-  const formattedDate = date.toLocaleString();
+  const handleSelectionChange = () => {
+    onSelect(nft.id);
+  };
   return (
     <>
       <div key={nft.id} className="nft">
-        <input type="checkbox" id={nft.id} />
-        <label htmlFor={nft.id}>{formattedDate}</label>
+        <input
+          type="checkbox"
+          id={nft.id}
+          checked={selected}
+          onChange={handleSelectionChange}
+        />
+        <label htmlFor={nft.id}>{formattedDate+' ->'}</label>
+        <label htmlFor={nft.price}>{ethValue} ETH</label>
       </div>
     </>
   );

@@ -27,35 +27,10 @@ export const LaboProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [collections, setCollections] = useState(null);
   const [allNfts, setAllNfts] = useState(null);
-  const [categoryzed , setCategoryzed] = useState(null);
+  const [categoryzed, setCategoryzed] = useState(null);
   const [filtredNFTs, setFiltredNFTs] = useState(null);
+  const [selected, SetSelected] = useState(null);
   const [request, setRequest] = useState(null);
-  const Request = [
-    {
-      owner: "0x1254dsf6s8sf",
-      buyer: "0x1254dsf6s8sf",
-      date: 1245587,
-      deleted: false,
-      price: 30000000,
-      nfts: [5, 2, 0, 1, 4],
-    },
-    {
-      owner: "0x1254dsf6s8sf",
-      buyer: "0x1254dsf6s8sf",
-      date: 1245587,
-      deleted: false,
-      price: 30000000,
-      nfts: [5, 2, 0, 1, 4],
-    },
-    {
-      owner: "0x1254dsf6s8sf",
-      buyer: "0x1254dsf6s8sf",
-      date: 1245587,
-      deleted: false,
-      price: 30000000,
-      nfts: [5, 2, 0, 1, 4],
-    },
-  ];
 
   const getAllNFTs = async () => {
     const result = [];
@@ -141,6 +116,8 @@ export const LaboProvider = ({ children }) => {
         filtredNFTs,
         categoryzed,
         request,
+        selected,
+        SetSelected,
         getLaboratory,
         setCategoryzed,
         makeRequest,
