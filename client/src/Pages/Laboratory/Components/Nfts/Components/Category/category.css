@@ -1,0 +1,10 @@
+.text{
+    font-weight: bold;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 5px;
+    margin: 5px;
+  }

@@ -70,8 +70,6 @@ export const LaboProvider = ({ children }) => {
     setAllNfts(result);
     setCategoryzed(categorizeNfts(result));
   };
-
-  console.log(categoryzed);
   // Get the laboratory data from the contract
   const getLaboratory = async (_address) => {
     try {

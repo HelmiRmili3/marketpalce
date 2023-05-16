@@ -21,10 +21,10 @@ import Profile from "../Pages/Patient/Components/Profile";
 import PatientPage from "../Pages/Patient/PateintPage";
 
 import Laboratory from "../Pages/Laboratory/LaboratoryPage";
-import Purchased from "../Pages/Laboratory/Components/purchased";
-import Requests from "../Pages/Laboratory/Components/requests";
-import Nfts from "../Pages/Laboratory/Components/nfts";
-import Card from "../Pages/Laboratory/Components/profile";
+import Purchased from "../Pages/Laboratory/Components/Purchased/purchased";
+import Requests from "../Pages/Laboratory/Components/Requests/requests";
+import Nfts from "../Pages/Laboratory/Components/Nfts/nfts";
+import Card from "../Pages/Laboratory/Components/Profile/profile";
 
 export default function RoutesComponent() {
   return (

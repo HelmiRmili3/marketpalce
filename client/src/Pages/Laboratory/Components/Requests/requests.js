@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./requests.css";
-import { useNftDatabase } from "../../../Contexts/NFTdatabase";
-import { useLabo } from "../../../Contexts/laboContext";
+import { useNftDatabase } from "../../../../Contexts/NFTdatabase";
+import { useLabo } from "../../../../Contexts/laboContext";
 export default function Requests() {
   // const {setPrice} = useLabo();
   // setPrice(0);
