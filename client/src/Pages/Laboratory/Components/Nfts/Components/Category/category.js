@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  } from "react";
 import NFT from "../Nft/Nft";
 import "./category.css";
 const Category = ({ category, nftList, selectedNFTs, setSelectedNFTs }) => {

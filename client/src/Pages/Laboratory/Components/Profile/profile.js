@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {  } from "react";
 import "./profile.css";
-import { useLabo } from "../../../../Contexts/laboContext";
-import { useAuth } from "../../../../Contexts/authContext";
 const Card = ({account}) => {
   // const [balance, setBalance] = useState(0);
   // const [nftCount, setNftCount] = useState(0);

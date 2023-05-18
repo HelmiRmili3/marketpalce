@@ -1,9 +1,43 @@
-import React from "react";
 import {
   // Auth0Contract,
   ComposableContract,
   MedicalDataNFTContract,
 } from "./contracts";
+export const filterListOfNFTs = (_collections, _categorys) => {
+  const nfts = [];
+  Object.entries(_collections).filter(([patient, collections]) => {
+    const userCollection = [];
+    const userData = [];
+    Object.entries(collections).filter(([collection, data]) => {
+      userCollection.push(collection);
+      userData.push(...data);
+      return;
+    });
+
+    if (_categorys.length > 0) {
+      const allItemsPresent = _categorys.every((item) =>
+        userCollection.includes(item)
+      );
+      if (allItemsPresent) {
+        nfts.push(...userData);
+      }
+    } else {
+      nfts.push(...userData);
+    }
+    return;
+  });
+  return nfts;
+};
+export const extractNfts = (_collections) => {
+  const nfts = [];
+  Object.entries(_collections).filter(([patient, collections]) => {
+    Object.entries(collections).filter(([collection, data]) =>
+      nfts.push(...data)
+    );
+    return;
+  });
+  return nfts;
+};
 
 export const getCollections = async () => {
   try {

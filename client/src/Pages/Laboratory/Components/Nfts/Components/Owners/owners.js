@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import PersonIcon from "@mui/icons-material/Person";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import Purchase from "../Purchase/purchase";
+import { extractNfts } from "../../../../../../utils/helper";
 import "./owner.css";
 import Categorys from "../Categorys/categorys";
 const Owners = ({ patients, selectedNFTs, setSelectedNFTs }) => {
+  const nfts = extractNfts(patients);
 
+  const totalprice = selectedNFTs.reduce(
+    (totalprice, id) => totalprice + parseInt(nfts[id].price),0
+  );
   return (
     <>
       <div className="nft-list">
@@ -16,6 +25,11 @@ const Owners = ({ patients, selectedNFTs, setSelectedNFTs }) => {
           />
         ))}
       </div>
+      <Purchase
+        nftcount={nfts.length}
+        nftselected={selectedNFTs.length}
+        totalPrice={totalprice}
+      />
     </>
   );
 };
@@ -33,11 +47,14 @@ function Patient({ address, nftCategories, selectedNFTs, setSelectedNFTs }) {
   return (
     <div key={address}>
       <div className={selected ? "patient selected" : "patient"}>
+        <PersonIcon className="custom-icon" />
         <label onClick={handleSelect} htmlFor={address}>
-          Patient: {address}
+          {address}
         </label>
         <Count className="count" nftCategories={nftCategories} />
-        <button onClick={handelOpen}>{open ? "-" : "+"}</button>
+        <button onClick={handelOpen}>
+          {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </button>
       </div>
       {open && (
         <Categorys
@@ -56,10 +73,10 @@ function Count({ nftCategories }) {
       {Object.entries(nftCategories).map(([category, nftList]) => (
         <label
           key={category}
-          style={{ margin: "none", flex: "3" }}
+          className="categoryCount"
           htmlFor={category}
         >
-          {nftList.length > 0 ? nftList.length : "-"}
+          {category}:{nftList.length !== null ? nftList.length : "-"}
         </label>
       ))}
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./purchased.css";
-import { useLabo } from "../../../../Contexts/laboContext";
+//import { useLabo } from "../../../../Contexts/laboContext";
 export default function Purchased() {
   // const { ownedList,setPrice } = useLabo();
   // setPrice(0);

@@ -1,6 +1,7 @@
  .nft-list {
     display: flex;
     flex-direction: column;
+    color: blue;
   }
   .patient{
     display: flex;
@@ -12,21 +13,28 @@
 
   }
   .patient label{
+    padding: 6px 0 6px 0;
     flex: 10;
   }
   .patient button {
     flex:1 ;
-    margin-right: 0px;
-    background-color: rgb(250, 250, 250);
     border:  none;
-    border-radius: 5px;
     color: black;
     font-size: large;
+    background-color: transparent;
   }
   .patient Count{
-    flex: 5;
+    flex: 6;
   }
+  .categoryCount{
+    margin: none;
+    flex: 2 
+  }
+  
   .selected{
     background-color: rgb(111, 212, 111);
   }
-  
+  .custom-icon{
+    color: blue;
+    padding: 6px 0px 6px 0px;
+  }

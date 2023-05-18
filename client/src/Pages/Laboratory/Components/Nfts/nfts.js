@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { useLabo } from "../../../../Contexts/laboContext";
 import Owners from "./Components/Owners/owners";
 import Empty from "./Components/NoNFT/empty";
-export default function Nfts() {
+import Filter from "./Components/Filter/filter";
+const Nfts = () => {
   const { categoryzed } = useLabo();
+  const [allNfts, setAllNfts] = useState(categoryzed);
   const [selectedNFTs, setSelectedNFTs] = useState([]);
-  
   return (
     <>
-      <h1>{selectedNFTs.length}</h1>
-      {categoryzed ? (
+      <Filter
+        selectedNFTs={selectedNFTs}
+        setSelectedNFTs={setSelectedNFTs}
+        allNfts={allNfts}
+        setAllNfts={setAllNfts}
+      />
+      {allNfts ? (
         <Owners
-          patients={categoryzed}
+          patients={allNfts}
           selectedNFTs={selectedNFTs}
           setSelectedNFTs={setSelectedNFTs}
         />
@@ -20,4 +26,5 @@ export default function Nfts() {
       )}
     </>
   );
-}
+};
+export default Nfts;
