@@ -10,7 +10,7 @@ const Category = ({ category, nftList, selectedNFTs, setSelectedNFTs }) => {
     }
   };
   return (
-    <div key={category} className="category">
+    <div key={category} className="category non-selectable">
       {/* <input type="checkbox" id={category} onChange={selectedCategory} /> */}
       <label className="text" htmlFor={category}>
         {category}

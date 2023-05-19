@@ -81,7 +81,7 @@ const Popop = ({ filtred, setFiltred, setAllNfts, setOpen }) => {
   };
 
   return (
-    <div className="popup">
+    <div className="popup non-selectable">
       <div className="filed">
         <label>Start Date:</label>
         <input

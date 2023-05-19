@@ -1,8 +1,49 @@
+import React from "react";
 import {
   // Auth0Contract,
   ComposableContract,
   MedicalDataNFTContract,
 } from "./contracts";
+
+export const composeResquests = (collectionName,buyerAddress, period, nfts, allNfts) => {
+  console.log(buyerAddress);
+  console.log(period);
+  console.log(nfts);
+  console.log(allNfts);
+  const nftList = allNfts?.filter((nft) => nfts?.includes(nft.id));
+  console.log("nft list :", nftList);
+  const requests = {};
+  const prices = {};
+  //const collectionName = "collection1";
+  nftList?.forEach((nft) => {
+    if (requests[nft.owner] == null) {
+      requests[nft.owner] = [];
+      requests[nft.owner].push(nft.id);
+    } else {
+      requests[nft.owner].push(nft.id);
+    }
+    if (prices[nft.owner] == null) {
+      prices[nft.owner] = parseInt(nft.price);
+    } else {
+      prices[nft.owner] += parseInt(nft.price);
+    }
+  });
+  console.log(requests);
+  console.log(prices);
+  const labRequests = [];
+   Object.entries(requests).forEach(([owner, nftList]) => {
+    return labRequests.push({
+      name: collectionName,
+      buyer: buyerAddress,
+      owner: owner,
+      price: prices[owner],
+      period: period,
+      nfts: nftList,
+    });
+  });
+  return labRequests;
+};
+
 export const filterListOfNFTs = (_collections, _categorys) => {
   const nfts = [];
   Object.entries(_collections).filter(([patient, collections]) => {

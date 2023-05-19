@@ -27,7 +27,7 @@ const Owners = ({ patients, selectedNFTs, setSelectedNFTs }) => {
       </div>
       <Purchase
         nftcount={nfts.length}
-        nftselected={selectedNFTs.length}
+        nftselected={selectedNFTs}
         totalPrice={totalprice}
       />
     </>
@@ -46,7 +46,7 @@ function Patient({ address, nftCategories, selectedNFTs, setSelectedNFTs }) {
   };
   return (
     <div key={address}>
-      <div className={selected ? "patient selected" : "patient"}>
+      <div className={selected ? "patient selected non-selectable " : "patient non-selectable "}>
         <PersonIcon className="custom-icon" />
         <label onClick={handleSelect} htmlFor={address}>
           {address}

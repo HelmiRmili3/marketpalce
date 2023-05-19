@@ -25,12 +25,12 @@ export function useLabo() {
 export const LaboProvider = ({ children }) => {
   const { address } = useWallet();
   const [user, setUser] = useState();
-  const [collections, setCollections] = useState(null);
-  const [allNfts, setAllNfts] = useState(null);
-  const [categoryzed, setCategoryzed] = useState(null);
-  const [filtredNFTs, setFiltredNFTs] = useState(null);
-  const [selected, SetSelected] = useState(null);
-  const [request, setRequest] = useState(null);
+  const [collections, setCollections] = useState([]);
+  const [allNfts, setAllNfts] = useState([]);
+  const [categoryzed, setCategoryzed] = useState([]);
+  const [filtredNFTs, setFiltredNFTs] = useState([]);
+  const [selected, SetSelected] = useState([]);
+  let [requests, setRequests] = useState([]);
 
   const getAllNFTs = async () => {
     const result = [];
@@ -47,22 +47,38 @@ export const LaboProvider = ({ children }) => {
   };
   // Get the laboratory data from the contract
   const getLaboratory = async (_address) => {
-    try {
-      const response = await Auth0Contract.methods
-        .getLaboratory(_address)
-        .call();
-      setUser(parseLaboratory(response));
-    } catch (error) {
-      console.log(error);
+    if (_address) {
+      try {
+        const response = await Auth0Contract.methods
+          .getLaboratory(_address)
+          .call();
+        setUser(parseLaboratory(response));
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   // Make a collection of requests
   const makeRequest = async (_request) => {
     try {
-      await ComposableContract.methods.addBuyRequest(_request).then(() => {
-        console.log("Request sent successfully");
+      const response = await ComposableContract.methods
+        .addBuyRequest(_request)
+        .send({ from: address, gas: 567202});
+      console.log("Request sent successfully");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // get all laboratory requestes
+  const getRequests = async () => {
+    try {
+      const response = await ComposableContract.methods.getRequests().call({
+        from: address,
       });
+      setRequests(response);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +119,7 @@ export const LaboProvider = ({ children }) => {
 
   useEffect(() => {
     getLaboratory(address);
+    getRequests();
     getCollections();
     getAllNFTs();
   }, [address]);
@@ -115,7 +132,7 @@ export const LaboProvider = ({ children }) => {
         allNfts,
         filtredNFTs,
         categoryzed,
-        request,
+        requests,
         selected,
         SetSelected,
         getLaboratory,
@@ -127,7 +144,7 @@ export const LaboProvider = ({ children }) => {
         acceptPayment,
         rejectPayment,
         setFiltredNFTs,
-        setRequest,
+        setRequests,
       }}
     >
       {children}

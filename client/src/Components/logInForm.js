@@ -26,6 +26,7 @@ function Login(props) {
       setIsLoggedIn(true);
       const profileUrl = `/users/${currentUser.role}/profile`;
       navigate(profileUrl);
+      localStorage.setItem("loggedIn", "true");
     } else {
       console.log("No users found");
     }

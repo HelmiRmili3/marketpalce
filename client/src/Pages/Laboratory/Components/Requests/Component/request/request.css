@@ -1,0 +1,74 @@
+.order-item {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.2rem;
+    justify-content: space-between;
+  }
+  
+  .order-id {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    color: black;
+    margin-right: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+
+  }
+  
+  .order-address {
+    flex: 1;
+    font-family: 'Courier New', Courier, monospace;
+
+  }
+  
+  .order-date {
+    margin-right: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+
+  }
+  
+  .order-status {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+
+  }
+  
+  .order-status.Accepted {
+    background-color: green;
+    color: white;
+  }
+  
+  .order-status.Rejected {
+    background-color: red;
+    color: white;
+  }
+
+  .order-status.Waiting{
+    background-color: rgb(200, 200, 207);
+    color: white;
+  }
+  .seeMore{
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: transparent;
+  }
+  .see-more{
+    margin: 0 20px 0 20px;
+    display: flex;
+    width: 80%;
+    /*margin-top: px;*/
+    align-items: center;
+    border-radius: 0 0  20px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    justify-content: space-between;
+
+  }

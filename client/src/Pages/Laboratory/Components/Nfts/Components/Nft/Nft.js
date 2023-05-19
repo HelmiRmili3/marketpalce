@@ -11,7 +11,7 @@ const NFT = ({ nft,selected,onSelect }) => {
   };
   return (
     <>
-      <div key={nft.id} className="nft">
+      <div key={nft.id} className="nft non-selectable ">
         <input
           type="checkbox"
           id={nft.id}
