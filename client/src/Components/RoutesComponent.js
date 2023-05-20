@@ -16,9 +16,10 @@ import Patients from "../Pages/Admin/Components/patients";
 import Laboratorys from "../Pages/Admin/Components/laboratorys";
 import Admins from "../Pages/Admin/Components/admins";
 
-import Collections from "../Pages/Patient/Components/Collections";
-import Profile from "../Pages/Patient/Components/Profile";
+import Collections from "../Pages/Patient/Components/Nfts/Collections";
+import Profile from "../Pages/Patient/Components/Profile/Profile";
 import PatientPage from "../Pages/Patient/PateintPage";
+import PatientRequests from "../Pages/Patient/Components/Requests/requests";
 
 import Laboratory from "../Pages/Laboratory/LaboratoryPage";
 import Purchased from "../Pages/Laboratory/Components/Purchased/purchased";
@@ -44,7 +45,7 @@ export default function RoutesComponent() {
           >
             <Route path="profile" element={<Profile />} />
             <Route path="collections" element={<Collections />} />
-            <Route path="settings" element={<div>Settings</div>} />
+            <Route path="requests" element={<PatientRequests />} />
           </Route>
           <Route
             path="/users/laboratory/"

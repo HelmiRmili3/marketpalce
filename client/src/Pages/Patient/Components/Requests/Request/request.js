@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./request.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { useLabo } from "../../../../../../Contexts/laboContext";
+import { usePatient } from "../../../../../Contexts/patientContext";
 const Web3 = require("web3");
 const web3 = new Web3();
 const Request = ({ request }) => {
-  const { acceptPayment, rejectPayment } = useLabo();
+  const { acceptAndRejectRequests } = usePatient();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
   useEffect(() => {
@@ -49,11 +48,10 @@ const Request = ({ request }) => {
         {status == "Buy" ? (
           <Purchase
             request={request}
-            acceptPayment={acceptPayment}
-            rejectPayment={rejectPayment}
+            acceptAndRejectRequests={acceptAndRejectRequests}
           />
         ) : (
-          <div></div>
+          <></>
         )}
         <div className="seeMore" onClick={handelOpen}>
           {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
@@ -72,18 +70,18 @@ const Request = ({ request }) => {
 };
 export default Request;
 
-const Purchase = ({ request, acceptPayment, rejectPayment }) => {
+const Purchase = ({ request, acceptAndRejectRequests }) => {
   return (
     <>
       <button
         className="buy-button"
-        onClick={() => acceptPayment(request.id, request.price)}
+        onClick={() => acceptAndRejectRequests(request.id, true)}
       >
         Purchase
       </button>
       <button
         className="reject-button"
-        onClick={() => rejectPayment(request.id)}
+        onClick={() => acceptAndRejectRequests(request.id, false)}
       >
         Reject
       </button>

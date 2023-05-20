@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./PopupForm.css";
 
-import { useNftDatabase } from "../../../Contexts/NFTdatabase";
-import { usePatient } from "../../../Contexts/patientContext";
+import { useNftDatabase } from "../../../../Contexts/NFTdatabase";
+import { usePatient } from "../../../../Contexts/patientContext";
 const PopupForm = () => {
   const { createNft, patient } = usePatient();
   const [isOpen, setIsOpen] = useState(false);

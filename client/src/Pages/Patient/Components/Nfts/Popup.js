@@ -1,5 +1,5 @@
 import React from "react";
-import "./Popup.css";
+import "./nftpopup.css";
 import ReactJson from 'react-json-view';
 
 const Popup = ({ visible, message, header, onClose }) => {
@@ -8,7 +8,7 @@ const Popup = ({ visible, message, header, onClose }) => {
   
   return (
     <div>
-      <div className="popup">
+      <div className="pftopup">
         <div className="popup-inner">
           <h2>{header}</h2>
           <ReactJson src={data} theme="monokai" />

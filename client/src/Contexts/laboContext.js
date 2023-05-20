@@ -15,13 +15,10 @@ import {
   getNfts,
 } from "../utils/helper";
 import { useWallet } from "./walletContext";
-
 const LaboContext = createContext();
-
 export function useLabo() {
   return useContext(LaboContext);
 }
-
 export const LaboProvider = ({ children }) => {
   const { address } = useWallet();
   const [user, setUser] = useState();
@@ -58,13 +55,12 @@ export const LaboProvider = ({ children }) => {
       }
     }
   };
-
   // Make a collection of requests
   const makeRequest = async (_request) => {
     try {
       const response = await ComposableContract.methods
         .addBuyRequest(_request)
-        .send({ from: address, gas: 567202});
+        .send({ from: address, gas: 967202 });
       console.log("Request sent successfully");
       console.log(response);
     } catch (error) {
@@ -78,7 +74,6 @@ export const LaboProvider = ({ children }) => {
         from: address,
       });
       setRequests(response);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -98,10 +93,13 @@ export const LaboProvider = ({ children }) => {
   // Get owned NFTs from the contract
 
   // Accept payment for a request
-  const acceptPayment = async (_id) => {
+  const acceptPayment = async (_id, _price) => {
     try {
-      await ComposableContract.methods.acceptPayment(_id).call();
-      console.log("The request has been accepted successfully");
+      const response = await ComposableContract.methods
+        .acceptPayment(_id)
+        .send({ from: address, value: _price, gas: 900000 });
+      console.log(response);
+      console.log("The request has been accepted");
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +108,10 @@ export const LaboProvider = ({ children }) => {
   // Reject payment for a request
   const rejectPayment = async (_id) => {
     try {
-      await ComposableContract.methods.rejectPayment(_id).call();
+      const response = await ComposableContract.methods
+        .rejectPayment(_id)
+        .send({ from: address, gas: 900000 });
+      console.log(response);
       console.log("The request has been rejected");
     } catch (error) {
       console.log(error);

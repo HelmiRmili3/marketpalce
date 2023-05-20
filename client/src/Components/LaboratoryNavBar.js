@@ -3,10 +3,9 @@ import "../App.css";
 
 import { useMatch, useResolvedPath, Link } from "react-router-dom";
 import { useAuth } from "../Contexts/authContext";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 export default function LaboratoryNavBar() {
   const { logOut, setIsLoggedIn } = useAuth();
-
   const HandeleLogout = () => {
     logOut();
     setIsLoggedIn(false);
@@ -23,7 +22,7 @@ export default function LaboratoryNavBar() {
         <CustomLink to="/users/laboratory/requests">Orders</CustomLink>
       </ul>
       <button className="navbar__logout" onClick={HandeleLogout}>
-        Logout
+        <LogoutIcon />
       </button>
     </nav>
   );

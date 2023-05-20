@@ -1,5 +1,5 @@
-import React, {} from "react";
-import Grid from "../../../Components/nftGrid";
+import React from "react";
+import Grid from "./nftGrid";
 import PopupForm from "./PopupForm";
 export default function Collections() {
   return (

@@ -1,0 +1,18 @@
+.bar{
+  width: 45%;
+  height:3px;
+  background-color: rgb(206, 204, 204);
+  margin:20px 20px;
+  border-radius: 5px;
+}
+.label{
+  text-align: center;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(206, 204, 204) ;
+}
+.custom-label{
+  display: flex;
+  flex-direction: row;
+}

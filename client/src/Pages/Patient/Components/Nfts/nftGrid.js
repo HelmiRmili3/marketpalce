@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./grid.css";
-import Popup from "../Pages/Patient/Components/Popup";
-import { usePatient } from "../Contexts/patientContext";
+import Popup from "./Popup";
+import { usePatient } from "../../../../Contexts/patientContext";
 export default function Grid() {
   const { nfts } = usePatient();
   const [popupVisible, setPopupVisible] = useState(false);

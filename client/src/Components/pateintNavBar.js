@@ -19,7 +19,7 @@ export default function PatientNavBar() {
       <ul className="navbar__links">
         <CustomLink to="/users/patient/profile">Profile</CustomLink>
         <CustomLink to="/users/patient/collections">Collections</CustomLink>
-        <CustomLink to="/users/patient/settings">Settings</CustomLink>
+        <CustomLink to="/users/patient/requests">Requests</CustomLink>
       </ul>
       <button className="navbar__logout" onClick={HandeleLogout}>
         Logout

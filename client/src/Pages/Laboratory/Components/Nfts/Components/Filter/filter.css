@@ -21,13 +21,17 @@
     text-align: center;
 }
 .div-reset button{
-    background-color: rgb(110, 142, 231);
+    background-color: #e0e5ec;
+
+    /*background-color: rgb(110, 142, 231);*/
     border-radius: 5px;
     cursor: pointer;
     border: none;
 }
 .div-filters button{
-    background-color: rgb(110, 142, 231);
+    /*background-color: rgb(110, 142, 231);*/
+    background-color: #e0e5ec;
+
     border-radius: 5px;
     cursor: pointer;
     border: none;

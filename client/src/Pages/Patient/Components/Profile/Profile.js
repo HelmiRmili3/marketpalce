@@ -1,6 +1,6 @@
 import React from "react";
-import "../../../App.css";
-import { usePatient } from "../../../Contexts/patientContext";
+import "../../../../App.css";
+import { usePatient } from "../../../../Contexts/patientContext";
 export default function Profile() {
   const {patient} = usePatient();
   return (

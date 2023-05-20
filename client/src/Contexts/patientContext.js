@@ -16,7 +16,7 @@ export const PatientProvider = ({ children }) => {
   const { address } = useWallet();
   const [patient, setPatient] = useState(null);
   const [nfts, setNfts] = useState(null);
-  const [requests, setRequests] = useState(null);
+  const [requests, setRequests] = useState([]);
   // get patient
   useEffect(() => {
     const fetchPatient = async () => {
@@ -74,7 +74,7 @@ export const PatientProvider = ({ children }) => {
       await MedicalDataNFTContract.methods
         .mint(_name, _price, _data, _birthday, _sexe)
         .send({ from: address, gas: 900000 });
-        fetchNfts();
+      fetchNfts();
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PersonIcon from "@mui/icons-material/Person";
+import FaceIcon from "@mui/icons-material/Face";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Purchase from "../Purchase/purchase";
@@ -10,7 +10,8 @@ const Owners = ({ patients, selectedNFTs, setSelectedNFTs }) => {
   const nfts = extractNfts(patients);
 
   const totalprice = selectedNFTs.reduce(
-    (totalprice, id) => totalprice + parseInt(nfts[id].price),0
+    (totalprice, id) => totalprice + parseInt(nfts[id].price),
+    0
   );
   return (
     <>
@@ -46,8 +47,15 @@ function Patient({ address, nftCategories, selectedNFTs, setSelectedNFTs }) {
   };
   return (
     <div key={address}>
-      <div className={selected ? "patient selected non-selectable " : "patient non-selectable "}>
-        <PersonIcon className="custom-icon" />
+      <div
+        className={
+          selected
+            ? "patient selected non-selectable "
+            : "patient non-selectable "
+        }
+      >
+        <FaceIcon className="custom-icon" />
+        
         <label onClick={handleSelect} htmlFor={address}>
           {address}
         </label>
@@ -71,11 +79,7 @@ function Count({ nftCategories }) {
   return (
     <>
       {Object.entries(nftCategories).map(([category, nftList]) => (
-        <label
-          key={category}
-          className="categoryCount"
-          htmlFor={category}
-        >
+        <label key={category} className="categoryCount" htmlFor={category}>
           {category}:{nftList.length !== null ? nftList.length : "-"}
         </label>
       ))}
