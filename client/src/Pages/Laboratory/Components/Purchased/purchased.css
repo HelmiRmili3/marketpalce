@@ -1,13 +1,13 @@
 .grid-list {
     display: grid;
-    grid-template-columns: repeat(6, minmax(70px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
     margin: 1rem;
   }
   
   .grid-list__card {
     background-color: #fcfcfc;
-    height: 300px;
+    height: 320px;
     border-radius: 0.25rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -36,6 +36,11 @@
     margin: 0;
     font-size: 1rem;
     color: #666;
+  }
+  @media screen and (max-width: 1200px) {
+    .grid-list__date {
+      display: none;
+    }
   }
   
 .grid-list__button {

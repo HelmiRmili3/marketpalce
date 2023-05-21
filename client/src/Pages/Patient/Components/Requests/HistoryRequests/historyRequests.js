@@ -4,7 +4,7 @@ import CustomLabel from "../CostomLabel/costomLabel";
 const HistoryRequests = ({ requests }) => {
   return requests.length > 0 ? (
     <div className="order-list">
-      <CustomLabel label={"Sended"} />
+      <CustomLabel label={"History"} />
       {requests?.map((request, index) => (
         <Request key={index} request={request} />
       ))}

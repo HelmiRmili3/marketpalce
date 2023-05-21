@@ -2,9 +2,9 @@ import React from "react";
 import Request from "../request/request";
 import CustomLabel from "../CostomLabel/costomLabel";
 const Waiting = ({ requests }) => {
-  return requests.length >0 ? (
+  return requests?.length >0 ? (
     <div className="order-list">
-      <CustomLabel label={"Waiting"} />
+      <CustomLabel label={"Purchase"} />
       {requests?.map((request, index) => (
         <Request key={index} request={request} />
       ))}

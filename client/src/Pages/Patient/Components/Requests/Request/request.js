@@ -8,31 +8,14 @@ const Request = ({ request }) => {
   const { acceptAndRejectRequests } = usePatient();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
-  useEffect(() => {
-    if (!request.isPayedByBuyer) {
-      setStatus("Waiting");
-    }
-    if (request.isSeenBySeller && request.isAcceptedBySeller) {
-      setStatus("Accepted");
-    }
-    if (request.isSeenBySeller && !request.isAcceptedBySeller) {
-      setStatus("Rjected");
-    }
-    if (request.isSeenByBuyer && request.isPayedByBuyer) {
-      setStatus("Payed");
-    }
-    if (request.isAcceptedBySeller && !request.isSeenByBuyer) {
-      setStatus("Buy");
-    }
-    if (
-      request.isSeenBySeller &&
-      request.isAcceptedBySeller &&
-      request.isSeenByBuyer &&
-      !request.isPayedByBuyer
-    ) {
-      setStatus("Reject Payment");
-    }
-  }, []);
+  if (
+    request.isSeenBySeller == false &&
+    request.isAcceptedBySelle == false &&
+    request.isSeenByBuyer == false &&
+    request.isPayedByBuyer == false
+  ) {
+    setStatus("Buy");
+  }
 
   const date = new Date(request.date * 1000);
   const formattedDate = date.toLocaleDateString();
@@ -45,7 +28,7 @@ const Request = ({ request }) => {
         <div className="order-id">{parseInt(request.id) + 1}</div>
         <div className="order-address">{request.seller}</div>
         <div className="order-date">{""}</div>
-        {status == "Buy" ? (
+        {status === "Buy" ? (
           <Purchase
             request={request}
             acceptAndRejectRequests={acceptAndRejectRequests}
@@ -77,13 +60,13 @@ const Purchase = ({ request, acceptAndRejectRequests }) => {
         className="buy-button"
         onClick={() => acceptAndRejectRequests(request.id, true)}
       >
-        Purchase
+        Accepted
       </button>
       <button
         className="reject-button"
         onClick={() => acceptAndRejectRequests(request.id, false)}
       >
-        Reject
+        Rejected
       </button>
     </>
   );

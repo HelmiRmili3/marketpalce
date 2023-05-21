@@ -1,11 +1,15 @@
-import React from "react";
 import {
   // Auth0Contract,
   ComposableContract,
   MedicalDataNFTContract,
 } from "./contracts";
-
-export const composeResquests = (collectionName,buyerAddress, period, nfts, allNfts) => {
+export const composeResquests = (
+  collectionName,
+  buyerAddress,
+  period,
+  nfts,
+  allNfts
+) => {
   console.log(buyerAddress);
   console.log(period);
   console.log(nfts);
@@ -31,7 +35,7 @@ export const composeResquests = (collectionName,buyerAddress, period, nfts, allN
   console.log(requests);
   console.log(prices);
   const labRequests = [];
-   Object.entries(requests).forEach(([owner, nftList]) => {
+  Object.entries(requests).forEach(([owner, nftList]) => {
     return labRequests.push({
       name: collectionName,
       buyer: buyerAddress,
@@ -43,7 +47,6 @@ export const composeResquests = (collectionName,buyerAddress, period, nfts, allN
   });
   return labRequests;
 };
-
 export const filterListOfNFTs = (_collections, _categorys) => {
   const nfts = [];
   Object.entries(_collections).filter(([patient, collections]) => {
@@ -79,16 +82,6 @@ export const extractNfts = (_collections) => {
   });
   return nfts;
 };
-
-export const getCollections = async () => {
-  try {
-    const response = await ComposableContract.methods.getComposition().call();
-    return parseCollection(response);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const categorizeNfts = (_nfts) => {
   const patientNFTs = {};
   _nfts.forEach((nft) => {
@@ -206,11 +199,11 @@ export function parseNFTS(nfts) {
   });
   return result;
 }
-
 export function parseCollection(collections) {
   const result = [];
   collections.forEach((collection) => {
     result.push({
+      name : collection.collection,
       owner: collection.owner,
       buyer: collection.buyer,
       date: collection.date,
@@ -219,5 +212,5 @@ export function parseCollection(collections) {
       nfts: [...collection.nfts],
     });
   });
-  return;
+  return result;
 }

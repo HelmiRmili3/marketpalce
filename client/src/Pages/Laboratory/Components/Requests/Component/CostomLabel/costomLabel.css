@@ -1,7 +1,7 @@
 .bar{
   width: 45%;
   height:3px;
-  background-color: rgb(206, 204, 204);
+  background-color: #769FCD;
   margin:20px 20px;
   border-radius: 5px;
 }
@@ -10,7 +10,7 @@
   padding: 5px;
   font-size: 18px;
   font-weight: bold;
-  color: rgb(206, 204, 204) ;
+  color: #769FCD;
 }
 .custom-label{
   display: flex;

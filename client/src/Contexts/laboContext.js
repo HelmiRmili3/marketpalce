@@ -80,17 +80,16 @@ export const LaboProvider = ({ children }) => {
   };
 
   // categoraise them per collection
-
-  // const getPurshasedNfts = (_collections) => {
-  //   const purchased = {};
-  //   _collections.forEach(collection => {
-  //     collection.
-  //     if(purchased[])
-  //   });
-
-  // };
-
-  // Get owned NFTs from the contract
+  const getCollections = async () => {
+    try {
+      const response = await ComposableContract.methods
+        .getComposition()
+        .call({ from: address });
+      setCollections(parseCollection(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Accept payment for a request
   const acceptPayment = async (_id, _price) => {

@@ -8,7 +8,7 @@ const web3 = new Web3();
 const Purchase = ({ nftcount, nftselected, totalPrice }) => {
   const { allNfts, makeRequest } = useLabo();
   const { address } = useWallet();
-  const period = 1684692622;
+  const period = 100000;
   const collectionName = "collection1";
   const ethValue = web3.utils.fromWei(totalPrice.toString(), "ether");
   const handlePurchase = async () => {

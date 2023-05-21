@@ -31,25 +31,30 @@
 
   }
   
-  .order-status {
-    padding: 0.5rem 1rem;
+  
+  .order-status-Accepted {
+    padding: 0.3rem;
     border-radius: 9999px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
-
-  }
-  
-  .order-status.Accepted {
     background-color: green;
     color: white;
   }
   
-  .order-status.Rejected {
+  .order-status-Rejected {
+    padding: 0.3rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
     background-color: red;
     color: white;
   }
 
-  .order-status.Waiting{
+  .order-status-Waiting{
+    padding: 0.3rem ;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
     background-color: rgb(200, 200, 207);
     color: white;
   }
