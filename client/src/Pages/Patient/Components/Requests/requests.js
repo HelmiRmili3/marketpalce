@@ -1,12 +1,12 @@
 import React from "react";
-import "./requests.css";
 import HistoryRequests from "./HistoryRequests/historyRequests";
 import RejectedRequests from "./RejectedRequests/rejectedRequests";
 import WaitingRequests from "./WaitingRequests/waitingRequests";
+import Empty from "./EmptyPage/empty";
 import { usePatient } from "../../../../Contexts/patientContext";
 const PatientRequests = () => {
   const { requests } = usePatient();
-  console.log(requests)
+  console.log(requests);
   const list = requests?.slice().reverse();
   const oldRequest = list.filter((request) => {
     if (request.isSeenBySeller) {
@@ -16,9 +16,7 @@ const PatientRequests = () => {
   });
 
   const waitingRequestsList = list.filter((_request) => {
-    if (
-      _request.isSeenBySeller == false 
-    ) {
+    if (_request.isSeenBySeller == false) {
       return true;
     }
     return false;
@@ -34,14 +32,14 @@ const PatientRequests = () => {
   //   return false;
   // });
 
-  return list ? (
+  return list.lenght > 0 ? (
     <>
       <WaitingRequests requests={waitingRequestsList} />
       {/* <RejectedRequests requests={rejectedPayment} />
       <HistoryRequests requests={oldRequest} /> */}
     </>
   ) : (
-    <></>
+    <Empty />
   );
 };
 export default PatientRequests;

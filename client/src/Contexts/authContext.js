@@ -1,6 +1,10 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { parseAdmin, parsePatient, parseLaboratory } from "../utils/helper";
-import { Auth0Contract, ComposableContract, MedicalDataNFTContract } from "../utils/contracts";
+import {
+  Auth0Contract,
+  ComposableContract,
+  MedicalDataNFTContract,
+} from "../utils/contracts";
 import { useWallet } from "./walletContext";
 const AuthContext = createContext();
 export function useAuth() {
@@ -18,11 +22,15 @@ export const AuthProvider = ({ children }) => {
   };
   const { address, setaddress, changed, setChanged } = useWallet();
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(register(localStorage.getItem("loggedIn")));
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    register(localStorage.getItem("loggedIn"))
+  );
   const setUser = async () => {
     if (address) {
       try {
-        const userType = await Auth0Contract.methods.getUserType(address).call();
+        const userType = await Auth0Contract.methods
+          .getUserType(address)
+          .call();
         switch (userType) {
           case "admin":
             Auth0Contract.methods
@@ -59,6 +67,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("loggedIn", "false");
     setIsLoggedIn(register(localStorage.getItem("loggedIn")));
   };
+  const signUp = async (nom, prenom, email, hashedPassword, sexe, birthday) => {
+    try {
+      const result = await Auth0Contract.methods
+        .createPatient(nom, prenom, email, hashedPassword, sexe, birthday)
+        .send({ from: address, gas: 900000 });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     setUser();
@@ -76,7 +94,7 @@ export const AuthProvider = ({ children }) => {
         // setCurrentUser,
         isLoggedIn,
         setIsLoggedIn,
-        // signUp,
+        signUp,
         //logIn,
         logOut,
       }}

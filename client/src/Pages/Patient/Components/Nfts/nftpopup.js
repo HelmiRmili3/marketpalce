@@ -2,13 +2,12 @@ import React from "react";
 import "./nftpopup.css";
 import ReactJson from 'react-json-view';
 
-const Popup = ({ visible, message, header, onClose }) => {
+const NftPopup = ({ visible, message, header, onClose }) => {
   if (!visible) return null;
   const data =JSON.parse(message);
-  
   return (
     <div>
-      <div className="pftopup">
+      <div className="nftpopup">
         <div className="popup-inner">
           <h2>{header}</h2>
           <ReactJson src={data} theme="monokai" />
@@ -19,4 +18,4 @@ const Popup = ({ visible, message, header, onClose }) => {
   );
 };
 
-export default Popup;
+export default NftPopup;

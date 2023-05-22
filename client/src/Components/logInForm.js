@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "../App.css";
+import { SHA256 } from "crypto-js";
+
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/authContext";
 import { useWallet } from "../Contexts/walletContext";
 
@@ -8,8 +10,6 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const { currentUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const { address } = useWallet();
-  //$2y$10$TLgAqNWEHmVLQKMDZSH3juRA0EgPaQZmjL3J0Sbk1VMharJ.HDy6W
-  //$2y$10$TLgAqNWEHmVLQKMDZSH3juRA0EgPaQZmjL3J0Sbk1VMharJ.HDy6W
   const navigate = useNavigate();
 
   const handlePassword = (event) => {
@@ -22,7 +22,8 @@ function Login(props) {
   // }
 
   const handleLogin = async () => {
-    if (currentUser.password == password) {
+    const hashedPassword = SHA256(password).toString();
+    if (currentUser.password == hashedPassword) {
       setIsLoggedIn(true);
       const profileUrl = `/users/${currentUser.role}/profile`;
       navigate(profileUrl);

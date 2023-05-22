@@ -1,0 +1,9 @@
+.empty {
+  background-image: url("https://ouch-cdn2.icons8.com/FJEiV3x9qjSs-JComNUliI-fOzwuRCzNqohb5e_aexU/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNTg4/Lzg2YTMxMTI2LTc4/NzktNDI4My05Yjky/LWYyMjliNDc0OGU4/NC5zdmc.png");
+  background-repeat: no-repeat;
+  height: 300px;
+  width: 9;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
+}

@@ -1,20 +1,23 @@
 import "../App.css";
 import React from "react";
+import { SHA256 } from "crypto-js";
+
 import { useState } from "react";
 import { useWallet } from "../Contexts/walletContext";
 import { useAuth } from "../Contexts/authContext";
 import { useNavigate } from "react-router-dom";
+//const bcrypt = require('bcrypt');
 
-export default function SignUpForm() {
+const SignUpForm = () => {
   const { address } = useWallet();
   const { signUp } = useAuth();
-  
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTow, setPasswordTow] = useState("");
-
+  const [sexe, setSexe] = useState("male");
+  const [birthday, setBirthday] = useState(915197998);
   const navigate = useNavigate();
 
   const handleNomChange = (event) => {
@@ -39,11 +42,13 @@ export default function SignUpForm() {
       return str;
     }
   }
+
   const handleSubmit = async () => {
     if (passwordOne === passwordTow) {
+      const hashedPassword = SHA256(passwordOne).toString();
+      console.log(hashedPassword);
       try {
-        await signUp(nom, prenom, email, passwordOne, address, "0");
-
+        signUp(nom, prenom, email, hashedPassword, sexe, birthday);
         navigate("/login");
       } catch (error) {
         console.log(error);
@@ -118,4 +123,6 @@ export default function SignUpForm() {
       </div>
     </>
   );
-}
+};
+
+export default SignUpForm;

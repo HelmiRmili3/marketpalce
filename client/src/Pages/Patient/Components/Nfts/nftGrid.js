@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import "./grid.css";
-import Popup from "./Popup";
+import NftPopup from "./nftpopup";
+import Empty from "./EmptyPage/empty";
 import { usePatient } from "../../../../Contexts/patientContext";
-export default function Grid() {
+const Grid = () => {
   const { nfts } = usePatient();
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupdata, setPopUpData] = useState();
-
   const handleButtonClick = () => {
     setPopupVisible(true);
   };
-
   const handlePopupClose = () => {
     setPopupVisible(false);
   };
-
   function timeConvert(timestamp) {
     const date = new Date(timestamp * 1000).toLocaleDateString();
     return date;
@@ -31,7 +29,7 @@ export default function Grid() {
         return "https://i.insider.com/6123e07e4932030018457fb7?width=1136&format=jpeg";
     }
   }
-  return (
+  return nfts ? (
     <>
       <div className="nft-grid">
         {nfts.map((nft) => (
@@ -49,12 +47,15 @@ export default function Grid() {
           </div>
         ))}
       </div>
-      <Popup
+      <NftPopup
         visible={popupVisible}
         message={popupdata ? popupdata.data : ""}
         header={popupdata ? popupdata.name : ""}
         onClose={handlePopupClose}
       />
     </>
+  ) : (
+    <Empty />
   );
-}
+};
+export default Grid;
