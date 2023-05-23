@@ -8,35 +8,35 @@ const PatientRequests = () => {
   const { requests } = usePatient();
   const list = requests?.slice().reverse();
   const oldRequest = list.filter((request) => {
-    if (request.isSeenBySeller) {
+    if (request.isSeenBySeller && request.isSeenByBuyer) {
       return true;
     }
     return false;
   });
 
-  const waitingRequestsList = list.filter((request) => {
+  const oprovealRequest = list.filter((request) => {
     if (!request.isSeenBySeller) {
       return true;
     }
     return false;
   });
-  // const rejectedPayment = list.filter((request) => {
-  //   if (
-  //     request.isPayedByBuyer == true &&
-  //     request.isSeenBySeller == true &&
-
-  //   ) {
-  //     return true;
-  //   }
-  //   return false;
-  // });
+  const waitingRequests = list.filter((request) => {
+    if (
+      request.isSeenBySeller &&
+      request.isAcceptedBySeller &&
+      !request.isPayedByBuyer &&
+      !request.isSeenByBuyer
+    ) {
+      return true;
+    }
+    return false;
+  });
 
   return list ? (
     <>
-      <WaitingRequests requests={waitingRequestsList} />
+      <WaitingRequests requests={oprovealRequest} />
+      <RejectedRequests requests={waitingRequests} />
       <HistoryRequests requests={oldRequest} />
-      {/* <RejectedRequests requests={rejectedPayment} />
-       */}
     </>
   ) : (
     <Empty />

@@ -4,7 +4,7 @@ import {
   ComposableContract,
   MedicalDataNFTContract,
 } from "../utils/contracts";
-import { parsePatients } from "../utils/helper";
+import { parseLaboratorys, parsePatients } from "../utils/helper";
 import { useAuth } from "./authContext";
 const AdminContext = createContext();
 export function useAdmin() {
@@ -71,6 +71,7 @@ export const AdminProvider = ({ children }) => {
         const result = await Auth0Contract.methods
           .getLaboratorys()
           .call({ from: address });
+        setLaboratorys(parseLaboratorys(result));
       } catch (error) {
         console.log(error);
       }

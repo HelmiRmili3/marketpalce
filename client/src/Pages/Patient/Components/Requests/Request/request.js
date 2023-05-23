@@ -12,11 +12,43 @@ const Request = ({ request }) => {
   useEffect(() => {
     if (
       !request.isSeenBySeller &&
-      !request.isPayedByBuyer &&
       !request.isAcceptedBySeller &&
+      !request.isPayedByBuyer &&
       !request.isSeenByBuyer
     ) {
       setStatus("Buy");
+    }
+    if (
+      request.isSeenBySeller &&
+      !request.isAcceptedBySeller &&
+      !request.isPayedByBuyer &&
+      !request.isSeenByBuyer
+    ) {
+      setStatus("Rejected");
+    }
+    if (
+      request.isSeenBySeller &&
+      request.isAcceptedBySeller &&
+      !request.isPayedByBuyer &&
+      !request.isSeenByBuyer
+    ) {
+      setStatus("Waiting to pay");
+    }
+    if (
+      request.isSeenBySeller &&
+      request.isAcceptedBySeller &&
+      request.isPayedByBuyer &&
+      !request.isSeenByBuyer
+    ) {
+      setStatus("Rejected payment");
+    }
+    if (
+      request.isSeenBySeller &&
+      request.isAcceptedBySeller &&
+      request.isPayedByBuyer &&
+      request.isSeenByBuyer
+    ) {
+      setStatus("Accepted payment");
     }
   });
 
@@ -37,7 +69,9 @@ const Request = ({ request }) => {
             acceptAndRejectRequests={acceptAndRejectRequests}
           />
         ) : (
-          <></>
+          <>
+            <div>{status}</div>
+          </>
         )}
         <div className="seeMore" onClick={handelOpen}>
           {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}

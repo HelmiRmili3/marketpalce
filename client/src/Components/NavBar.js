@@ -14,13 +14,14 @@ export default function NavBar() {
   };
   return (
     <nav className="navbar">
-      <div to="#" className="navbar__logo">
-        Admin
-      </div>
+      <CustomLink to="/users/admin/profile">
+        <div className="navbar__logo">Admin</div>
+      </CustomLink>
+
       <ul className="navbar__links">
         <CustomLink to="/users/admin/patients-list">Patients</CustomLink>
         <CustomLink to="/users/admin/laboratorys-list">Laboratorys</CustomLink>
-        <CustomLink to="/users/admin/admins-list">Admins</CustomLink>
+        {/* <CustomLink to="/users/admin/admins-list">Admins</CustomLink> */}
       </ul>
       <button className="navbar__logout" onClick={HandeleLogout}>
         Logout

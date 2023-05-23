@@ -14,7 +14,7 @@ import SignUpForm from "./signUpForm";
 import Admin from "../Pages/Admin/AdminPage";
 import Patients from "../Pages/Admin/Components/patients/patients";
 import Laboratorys from "../Pages/Admin/Components/laboratorys/laboratorys";
-import Admins from "../Pages/Admin/Components/admins";
+//import Admins from "../Pages/Admin/Components/admins";
 
 import Collections from "../Pages/Patient/Components/Nfts/Collections";
 import Profile from "../Pages/Patient/Components/Profile/Profile";
@@ -72,7 +72,7 @@ export default function RoutesComponent() {
             <Route path="profile" element={<div>Profile</div>} />
             <Route path="patients-list" element={<Patients />} />
             <Route path="laboratorys-list" element={<Laboratorys />} />
-            <Route path="admins-list" element={<Admins />} />
+            {/* <Route path="admins-list" element={<Admins />} /> */}
           </Route>
         </Route>
       </Routes>

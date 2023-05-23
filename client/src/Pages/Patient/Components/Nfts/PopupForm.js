@@ -3,6 +3,7 @@ import "./PopupForm.css";
 
 import { useNftDatabase } from "../../../../Contexts/NFTdatabase";
 import { usePatient } from "../../../../Contexts/patientContext";
+import AddIcon from '@mui/icons-material/Add';
 const PopupForm = () => {
   const { createNft, patient } = usePatient();
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ const PopupForm = () => {
   return (
     <>
       <button className="open-form-button" onClick={handleOpenForm}>
-        Create NFT
+        <AddIcon/> NFT
       </button>
 
       {isOpen && (

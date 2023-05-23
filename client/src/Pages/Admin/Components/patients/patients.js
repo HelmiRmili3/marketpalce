@@ -7,7 +7,7 @@ export default function Patients() {
   return (
     <>
       <div className="user-list">
-        <h1>List of Patients</h1>
+        <h1>Patients</h1>
         <Users users={patients} role={"patient"} />
       </div>
     </>

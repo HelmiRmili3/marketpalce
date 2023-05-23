@@ -64,11 +64,18 @@ const User = ({ user, role }) => {
         <div className="value">{user.wallet}</div>
       </div>
       <div className="user">
-        user state:{userState ? "enabled" : "disabled"}
+        <div className="property">State:</div>
+        <div className="value">
+          {!userState ? (
+            <div className="online"></div>
+          ) : (
+            <div className="offline"></div>
+          )}
+        </div>
       </div>
       <div className="user">
         <button className="state-button" onClick={handleEnableDisable}>
-          {userState ? "Disabled" : "Enabled"}
+          {userState ? "Enabled" : "Disabled"}
         </button>
       </div>
     </>
