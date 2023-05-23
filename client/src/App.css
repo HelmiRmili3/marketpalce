@@ -420,6 +420,14 @@ nav a {
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.login-button{
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  padding: 7px 69px;
+  font-size: 18px;
+  border-radius: 5px;
+}
 
 @media (max-width: 768px) {
   .filter-bar {

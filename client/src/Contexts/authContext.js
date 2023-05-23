@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
         // laboratorys,
         // admins,
         // getUser,
-        // address,
+         address,
         // setaddress,
         currentUser,
         // setCurrentUser,

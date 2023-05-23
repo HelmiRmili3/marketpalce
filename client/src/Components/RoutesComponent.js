@@ -9,11 +9,11 @@ import RequireAuth from "./RequireAuth";
 import Login from "./logInForm";
 import SignUpForm from "./signUpForm";
 
-import Home from "../Pages/Home/Home";
+//import Home from "../Pages/Home/Home";
 
 import Admin from "../Pages/Admin/AdminPage";
-import Patients from "../Pages/Admin/Components/patients";
-import Laboratorys from "../Pages/Admin/Components/laboratorys";
+import Patients from "../Pages/Admin/Components/patients/patients";
+import Laboratorys from "../Pages/Admin/Components/laboratorys/laboratorys";
 import Admins from "../Pages/Admin/Components/admins";
 
 import Collections from "../Pages/Patient/Components/Nfts/Collections";
@@ -31,8 +31,8 @@ export default function RoutesComponent() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="" element={<Login />}></Route>
+        <Route exact path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUpForm />}></Route>
         <Route element={<RequireAuth />}>
           <Route

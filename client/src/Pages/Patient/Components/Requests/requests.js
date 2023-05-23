@@ -6,7 +6,6 @@ import Empty from "./EmptyPage/empty";
 import { usePatient } from "../../../../Contexts/patientContext";
 const PatientRequests = () => {
   const { requests } = usePatient();
-  console.log(requests);
   const list = requests?.slice().reverse();
   const oldRequest = list.filter((request) => {
     if (request.isSeenBySeller) {
@@ -15,8 +14,8 @@ const PatientRequests = () => {
     return false;
   });
 
-  const waitingRequestsList = list.filter((_request) => {
-    if (_request.isSeenBySeller == false) {
+  const waitingRequestsList = list.filter((request) => {
+    if (!request.isSeenBySeller) {
       return true;
     }
     return false;
@@ -32,11 +31,12 @@ const PatientRequests = () => {
   //   return false;
   // });
 
-  return list.lenght > 0 ? (
+  return list ? (
     <>
       <WaitingRequests requests={waitingRequestsList} />
+      <HistoryRequests requests={oldRequest} />
       {/* <RejectedRequests requests={rejectedPayment} />
-      <HistoryRequests requests={oldRequest} /> */}
+       */}
     </>
   ) : (
     <Empty />

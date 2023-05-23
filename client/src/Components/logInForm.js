@@ -1,29 +1,23 @@
 import React, { useState } from "react";
 import "../App.css";
 import { SHA256 } from "crypto-js";
-
+import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/authContext";
 import { useWallet } from "../Contexts/walletContext";
 
 function Login(props) {
   const [password, setPassword] = useState("");
-  const { currentUser, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { currentUser, setIsLoggedIn } = useAuth();
   const { address } = useWallet();
   const navigate = useNavigate();
 
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-  // function hashPassword(password) {
-  //   const salt = bcrypt.genSaltSync(10);
-  //   const hash = bcrypt.hashSync(password, salt);
-  //   return hash;
-  // }
-
   const handleLogin = async () => {
     const hashedPassword = SHA256(password).toString();
-    if (currentUser.password == hashedPassword) {
+    if (currentUser.password === hashedPassword) {
       setIsLoggedIn(true);
       const profileUrl = `/users/${currentUser.role}/profile`;
       navigate(profileUrl);
@@ -45,7 +39,7 @@ function Login(props) {
     <div className="container">
       <form>
         <div>
-          <h1>Login</h1>
+        <PersonIcon style={{color:"#0077ff" ,fontSize:"150px"}}/>
         </div>
         <div>{props.errors}</div>
         <div className="address-div">
@@ -61,7 +55,7 @@ function Login(props) {
           ></input>
         </div>
         <div className="form-group">
-          <button onClick={handleLogin}>Login</button>
+          <button className="login-button" onClick={handleLogin}>Login</button>
         </div>
       </form>
     </div>

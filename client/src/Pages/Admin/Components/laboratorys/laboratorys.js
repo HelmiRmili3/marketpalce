@@ -1,37 +1,43 @@
 import React, { useState } from "react";
-
-
-import { useAuth } from "../../../Contexts/authContext";
-import ListOfUsers from "../../../Components/ListOfUsers";
+//import { useAuth } from "../../../../Contexts/authContext";
+import { SHA256 } from "crypto-js";
+import { useAdmin } from "../../../../Contexts/adminContext";
+import Users from "../users/users";
 
 export default function Laboratorys() {
-  const { laboratorys } = useAuth();
+  const { laboratorys, fetchLaboratorys } = useAdmin();
+  //console.log(laboratorys);
   return (
     <>
       <div className="labo-div">
         <div className="user-list">
           <h1>List of Laboratorys</h1>
-          <ListOfUsers data={laboratorys} />
+          <Users users={laboratorys} role={"laboratory"} />
         </div>
         <SignUpFormLaboratory />
       </div>
     </>
   );
 }
+
 const SignUpFormLaboratory = () => {
-  const { signUp } = useAuth();
+  const { addlabo } = useAdmin();
   const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
+  const [license, setLicense] = useState("");
+  const [discription, setDiscription] = useState("");
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTow, setPasswordTow] = useState("");
-  const [address,setAddress] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleNomChange = (event) => {
     setNom(event.target.value);
   };
-  const handlePrenomChange = (event) => {
-    setPrenom(event.target.value);
+  const handleLicenseChange = (event) => {
+    setLicense(event.target.value);
+  };
+  const handleDiscriptionChange = (event) => {
+    setDiscription(event.target.value);
   };
   const handlePasswordOneChange = (event) => {
     setPasswordOne(event.target.value);
@@ -46,9 +52,10 @@ const SignUpFormLaboratory = () => {
     setAddress(event.target.value);
   };
   const handleSubmit = async () => {
+    const hash = SHA256(passwordOne).toString();
     if (passwordOne === passwordTow) {
       try {
-        await signUp(nom, prenom, email, passwordOne, address, 1);
+        await addlabo(nom, email, hash, address, license, discription);
         console.log("labo account added");
       } catch (error) {
         console.log(error);
@@ -64,26 +71,16 @@ const SignUpFormLaboratory = () => {
           <div>
             <h1>Signup</h1>
           </div>
-          <div className="sign-up-row">
-            <div className="form-group-row">
-              <input
-                type="text"
-                id="nom"
-                placeholder="Nom"
-                value={nom}
-                onChange={handleNomChange}
-              ></input>
-            </div>
-            <div className="form-group-row">
-              <input
-                type="text"
-                id="prenom"
-                placeholder="Prenom"
-                value={prenom}
-                onChange={handlePrenomChange}
-              ></input>
-            </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="nom"
+              placeholder="Nom"
+              value={nom}
+              onChange={handleNomChange}
+            ></input>
           </div>
+
           <div className="form-group">
             <input
               type="address"
@@ -100,6 +97,24 @@ const SignUpFormLaboratory = () => {
               placeholder="Enter your Email"
               value={email}
               onChange={handleEmailChange}
+            ></input>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="prenom"
+              placeholder="License"
+              value={license}
+              onChange={handleLicenseChange}
+            ></input>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="prenom"
+              placeholder="discription"
+              value={discription}
+              onChange={handleDiscriptionChange}
             ></input>
           </div>
           <div className="form-group">

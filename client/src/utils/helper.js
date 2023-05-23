@@ -18,7 +18,6 @@ export const composeResquests = (
   console.log("nft list :", nftList);
   const requests = {};
   const prices = {};
-  //const collectionName = "collection1";
   nftList?.forEach((nft) => {
     if (requests[nft.owner] == null) {
       requests[nft.owner] = [];
@@ -142,6 +141,20 @@ export function parsePatient(patient) {
     sexe: patient.sexe,
   };
 }
+export function parsePatients(patients) {
+  const result = [];
+  patients.forEach((patient) => {
+    result.push(parsePatient(patient));
+  });
+  return result;
+}
+export function parseLaboratorys(Laboratorys) {
+  const result = [];
+  Laboratorys.forEach((Laboratory) => {
+    result.push(parseLaboratory(Laboratory));
+  });
+  return result;
+}
 export function parseUser(user) {
   return {
     wallet: user.wallet,
@@ -203,7 +216,7 @@ export function parseCollection(collections) {
   const result = [];
   collections.forEach((collection) => {
     result.push({
-      name : collection.collection,
+      name: collection.collection,
       owner: collection.owner,
       buyer: collection.buyer,
       date: collection.date,

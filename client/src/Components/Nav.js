@@ -26,7 +26,7 @@ export default function Nav() {
             }
             onClick={ToggoleLogin}
           >
-            <Link to="/Login"> Login </Link>
+            <Link to="/login"> Login </Link>
           </button>
           <button
             className={

@@ -1,5 +1,4 @@
 import React from "react";
-import {} from "react";
 import "../App.css";
 export default function TextFiledComponent({ label, content }) {
   return (

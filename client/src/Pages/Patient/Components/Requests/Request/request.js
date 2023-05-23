@@ -8,14 +8,17 @@ const Request = ({ request }) => {
   const { acceptAndRejectRequests } = usePatient();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
-  if (
-    request.isSeenBySeller == false &&
-    request.isAcceptedBySelle == false &&
-    request.isSeenByBuyer == false &&
-    request.isPayedByBuyer == false
-  ) {
-    setStatus("Buy");
-  }
+
+  useEffect(() => {
+    if (
+      !request.isSeenBySeller &&
+      !request.isPayedByBuyer &&
+      !request.isAcceptedBySeller &&
+      !request.isSeenByBuyer
+    ) {
+      setStatus("Buy");
+    }
+  });
 
   const date = new Date(request.date * 1000);
   const formattedDate = date.toLocaleDateString();

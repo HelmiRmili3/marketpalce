@@ -85,8 +85,11 @@ export const PatientProvider = ({ children }) => {
     try {
       await ComposableContract.methods
         .rejectAndAcceptRequest(_id, _accept)
-        .call({ from: address });
-      console.log("Request has been rejected");
+        .send({ from: address })
+        .then((result) => {
+          console.log("your request is", _accept);
+          console.log(result);
+        });
     } catch (error) {
       console.log(error);
     }

@@ -1,8 +1,6 @@
 import React,{useState} from "react";
 
 import { useAuth } from "../../../Contexts/authContext";
-import ListOfUsers from "../../../Components/ListOfUsers";
-
 export default function Admins() {
   const { admins } = useAuth();
 
@@ -11,9 +9,9 @@ export default function Admins() {
       <div className="labo-div">
         <div className="user-list">
           <h1>List of Admins</h1>
-          <ListOfUsers data={admins} />
+          {/* <ListOfUsers data={admins} /> */}
         </div>
-        <SignUpFormAdmins />
+        {/* <SignUpFormAdmins /> */}
       </div>
     </>
   );
@@ -62,7 +60,7 @@ const SignUpFormAdmins = () => {
       <div className="container">
         <form>
           <div>
-            <h1>Signup</h1>
+            <h1>Add Labo</h1>
           </div>
           <div className="sign-up-row">
             <div className="form-group-row">
