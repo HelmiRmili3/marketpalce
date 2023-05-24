@@ -32,7 +32,7 @@ const Filter = ({ selectedNFTs, setSelectedNFTs, allNfts, setAllNfts }) => {
 export default Filter;
 
 function Collection() {
-  return <div className="div-collection">Collection</div>;
+  return <div className="div-collection">Marketplace</div>;
 }
 
 function Filters({ allNfts, setAllNfts, filtred, setFiltred }) {

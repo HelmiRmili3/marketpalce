@@ -8,18 +8,18 @@
   .grid-list__card {
     background-color: #fcfcfc;
     height: 320px;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
   }
   
   .grid-list__image {
-    height: 50%;
+    height: 45%;
     width: 100%;
     object-fit: cover;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
   }
   
   .grid-list__info {
@@ -43,12 +43,23 @@
     }
   }
   
-.grid-list__button {
+.grid-list__button__seemore {
     display: block;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
+    background-color: transparent;
+    color: #007bff;
+    border: 1px #007bff solid;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .grid-list__button__download {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: none;
+    color:#0069d9 ;
     border: none;
     border-radius: 0.25rem;
     font-size: 1rem;
@@ -62,4 +73,8 @@
   .grid-list__button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  .row-button{
+    display: flex;
+    flex-direction: row;
   }

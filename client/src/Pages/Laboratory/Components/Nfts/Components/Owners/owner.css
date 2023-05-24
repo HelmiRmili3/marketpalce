@@ -1,47 +1,61 @@
- .nft-list {
-    display: flex;
-    flex-direction: column;
-    color: blue;
-  }
-  .patient{
-    display: flex;
-    margin: 10px;
-    padding:4px;
-    border-radius: 5px;
-    background-color: #F7FBFC;
-    /*box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;*/
+.nft-list {
+  display: flex;
+  flex-direction: column;
+  color: blue;
+}
+.patient {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #f7fbfc;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+.patient button {
+  padding: 5px;
+  flex: 1;
+  border: none;
+  color: black;
+  font-size: large;
+  background-color: transparent;
+}
+.categoryCount {
+  flex: 1;
+  height: 20px;
+}
+.address {
+  display: flex;
+  flex-direction: row;
+  height: 20x;
+  justify-content: center;
+}
+.address label{
+  padding: 5px;
+}
+.count {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  justify-content: center;
+  font-weight: 600;
+  font-family:'Times New Roman', Times, serif;
+}
+.icon-button {
+  height: 20px;
+}
 
-  }
-  .patient label{
-    padding: 6px 0 6px 0;
-    flex: 10;
-  }
-  .patient button {
-    flex:1 ;
-    border:  none;
-    color: black;
-    font-size: large;
-    background-color: transparent;
-  }
-  .patient Count{
-    flex: 6;
-  }
-  .categoryCount{
-    margin: none;
-    flex: 2 
-  }
-  
-  .selected{
-    background-color: #769FCD;
-  }
-  .custom-icon{
-    color: 769FCD;
-    padding: 6px 0px 6px 0px;
-    margin-right: 5px;
-  }
-  .non-selectable {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none;
-  }
+.selected {
+  background-color: #769fcd;
+}
+.custom-icon {
+  color: #4487d4;
+  padding: 6px 0px 6px 0px;
+  margin-right: 5px;
+}
+.non-selectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}

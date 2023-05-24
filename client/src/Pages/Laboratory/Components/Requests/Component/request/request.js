@@ -27,9 +27,14 @@ const Request = ({ request }) => {
     ) {
       setStatus("Rejected");
     }
-    // if (request.isSeenByBuyer && request.isPayedByBuyer) {
-    //   setStatus("Payed");
-    // }
+    if (
+      request.isSeenBySeller &&
+      request.isAcceptedBySeller &&
+      request.isSeenByBuyer &&
+      request.isPayedByBuyer
+    ) {
+      setStatus("Payed");
+    }
     if (request.isAcceptedBySeller && !request.isSeenByBuyer) {
       setStatus("Buy");
     }
@@ -57,7 +62,7 @@ const Request = ({ request }) => {
         ) : status == "Rejected" ? (
           <div className="order-status-Rejected">Rejected</div>
         ) : (
-          <></>
+          <div className="order-status-Accepted">Payed</div>
         )}
         <div className="seeMore" onClick={handelOpen}>
           {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
@@ -67,7 +72,7 @@ const Request = ({ request }) => {
         <div className="see-more">
           Form :{request.buyer} <br />
           To :{request.seller} <br /> Date :{formattedDate} <br />
-          NFT :{request.ids}
+          NFT :{request.ids.join(",")}
           <br />
         </div>
       )}

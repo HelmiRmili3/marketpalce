@@ -54,15 +54,20 @@ function Patient({ address, nftCategories, selectedNFTs, setSelectedNFTs }) {
             : "patient non-selectable "
         }
       >
-        <FaceIcon className="custom-icon" />
-        
-        <label onClick={handleSelect} htmlFor={address}>
-          {address}
-        </label>
-        <Count className="count" nftCategories={nftCategories} />
-        <button onClick={handelOpen}>
-          {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </button>
+        <div  className="address">
+          <FaceIcon className="custom-icon" />
+          <label onClick={handleSelect} htmlFor={address}>
+            {address}
+          </label>
+        </div>
+        <div className="count">
+          <Count  nftCategories={nftCategories} />
+        </div>
+        <div className="icon-button">
+          <button onClick={handelOpen}>
+            {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </button>
+        </div>
       </div>
       {open && (
         <Categorys

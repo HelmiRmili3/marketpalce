@@ -8,7 +8,7 @@ const PatientRequests = () => {
   const { requests } = usePatient();
   const list = requests?.slice().reverse();
   const oldRequest = list.filter((request) => {
-    if (request.isSeenBySeller && request.isSeenByBuyer) {
+    if (request.isSeenBySeller) {
       return true;
     }
     return false;

@@ -12,11 +12,14 @@
     flex: 1;
     font-size: large;
     text-align: center;
-    padding: 6px 0 6px 0;
+    padding: 8px 0 8px 0;
+    color:blue;
 }
 .purchase{
     color: white;
     border-radius: 5px;
+    padding: 10px;
+    margin: 1px;
     background-color: #769FCD;
     border:none;
 }

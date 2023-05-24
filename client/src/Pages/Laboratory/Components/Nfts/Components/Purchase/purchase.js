@@ -3,19 +3,19 @@ import "./purchase.css";
 import { composeResquests } from "../../../../../../utils/helper";
 import { useWallet } from "../../../../../../Contexts/walletContext";
 import { useLabo } from "../../../../../../Contexts/laboContext";
+import AlertDialog from "../Dialog/dialog";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Web3 = require("web3");
 const web3 = new Web3();
 const Purchase = ({ nftcount, nftselected, totalPrice }) => {
   const { allNfts, makeRequest } = useLabo();
   const { address } = useWallet();
-  const period = 100000;
-  const collectionName = "collection1";
   const ethValue = web3.utils.fromWei(totalPrice.toString(), "ether");
-  const handlePurchase = async () => {
+  const handlePurchase = async (_period, _collectionName) => {
     const result = composeResquests(
-      collectionName,
+      _collectionName,
       address,
-      period,
+      _period,
       nftselected,
       allNfts
     );
@@ -33,6 +33,7 @@ const Purchase = ({ nftcount, nftselected, totalPrice }) => {
   return (
     <>
       <div className="buy-container non-selectable">
+        <ShoppingCartIcon style={{padding:"8px" ,color:"blue"}} />
         <Count className="count" count={nftcount} label="NFT" />
         <Count className="count" count={nftselected.length} label="Selected" />
         <Count
@@ -40,9 +41,11 @@ const Purchase = ({ nftcount, nftselected, totalPrice }) => {
           count={ethValue.toString()}
           label="Total(ETH)"
         />
-        <button className="purchase" onClick={handlePurchase}>
-          Purchase
-        </button>
+        <AlertDialog
+          handlePurchase={handlePurchase}
+          nftselected={nftselected}
+          totalPrice={totalPrice}
+        />
       </div>
     </>
   );
