@@ -1,7 +1,6 @@
-:root{
-  --primary-color:#0077ff;
+:root {
+  --primary-color: #0077ff;
 }
-
 
 .form-group {
   display: flex;
@@ -9,23 +8,25 @@
   margin: 10px;
 }
 
-.sign-up-row{
+.sign-up-row {
   display: flex;
   flex-direction: row;
 }
-.form-group-row{
+.form-group-row {
   padding: 10px;
 }
-form h1{
+form h1 {
   color: var(--primary-color);
   text-align: center;
 }
-input[type="password"],input[type="email"] ,input[type="address"]{
+input[type="password"],
+input[type="email"],
+input[type="address"] {
   border-radius: 5px;
   border: 0.5px solid var(--primary-color);
   padding: 10px;
 }
-input[type="text"]{
+input[type="text"] {
   background-color: transparent;
   border-radius: 5px;
   border: 0.5px solid var(--primary-color);
@@ -36,7 +37,7 @@ button[type="submit"] {
   border: 0.5px solid var(--primary-color);
 
   background-color: transparent;
-  color:var(--primary-color);
+  color: var(--primary-color);
   border-radius: 5px;
   width: 100px;
   font-size: 15px;
@@ -45,7 +46,7 @@ button[type="submit"] {
   cursor: pointer;
   margin-bottom: 10px;
 }
-.logo{
+.logo {
   background-color: var(--primary-color);
   padding: 5px 20px;
   border-radius: 20px;
@@ -71,10 +72,10 @@ nav li {
   margin: 0 10px;
 }
 
-nav li{
+nav li {
   height: 100%;
 }
-nav li:active{
+nav li:active {
   background-color: white;
 }
 
@@ -84,13 +85,13 @@ nav a {
   height: 100%;
   padding: 8px 40px;
 }
-.container{
+.container {
   display: grid;
   height: 542px;
   margin: 20px;
   justify-content: center;
 }
- form{
+form {
   border-radius: 10px;
   border: 1px var(--primary-color) solid;
   width: 300px;
@@ -100,9 +101,8 @@ nav a {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-
 }
-.address-div{
+.address-div {
   border-radius: 5px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -112,21 +112,22 @@ nav a {
   text-align: center;
   background-color: rgb(214, 207, 207);
 }
-.content{
+.content {
   margin: 1%;
   width: 98%;
   height: 88%;
   position: absolute;
   border-radius: 5px;
-  
 }
 .sidebar {
   border-radius: 5px;
   height: 96%; /* Make the sidebar fill the height of the parent container */
   width: 200px; /* Set the width of the sidebar */
   position: fixed; /* Fix the position of the sidebar */
-  background-color: var(--primary-color); /* Set the background color of the sidebar */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Add a box shadow */
+  background-color: var(
+    --primary-color
+  ); /* Set the background color of the sidebar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a box shadow */
 }
 
 .sidebar-header {
@@ -146,7 +147,6 @@ nav a {
   background-size: cover;
   background-position: center;
   margin: 20px;
-  
 }
 .sidebar-header h3 {
   margin: 0; /* Remove the margin around the heading */
@@ -177,7 +177,7 @@ nav a {
   background-color: white; /* Set the background color of the active link */
 }
 .sidebar-menu li a:hover {
-  color:black;
+  color: black;
   background-color: white; /* Set the background color of the hovered link */
 }
 
@@ -185,33 +185,31 @@ nav a {
   margin-left: 200px; /* Set the left margin of the main content to the width of the sidebar */
   padding: 20px; /* Add some padding to the main content */
 }
-.logout-button{
+.logout-button {
   padding: 10px 70px 10px 70px;
   background-color: white;
   border: none;
-  margin:6px;
+  margin: 6px;
   font-size: 15px; /* Increase the font size */
   text-align: center;
   border-radius: 5px;
   font-weight: bold;
-  color: var(--primary-color) ;
+  color: var(--primary-color);
 }
-.switch-button{
+.switch-button {
   padding: 8px 0px;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   font-weight: bold;
 }
-.login-left{
-  border-radius:  20px 0px 0px 20px;
+.login-left {
+  border-radius: 20px 0px 0px 20px;
 }
-.signup-right{
-  border-radius:  0px 20px 20px 0px;
-
+.signup-right {
+  border-radius: 0px 20px 20px 0px;
 }
-.is-active{
+.is-active {
   background-color: var(--primary-color);
-  
 }
 .is-active a {
   color: white;
@@ -220,9 +218,8 @@ nav a {
   padding: 10px;
 }
 
-.form-row{
+.form-row {
   padding: 10px;
-
 }
 
 .form-row-component {
@@ -233,10 +230,10 @@ nav a {
   font-weight: bold;
   color: blue;
 }
-.form-column{
+.form-column {
   padding: 10px;
 }
-.address-value{
+.address-value {
   border: 1px solid blue;
   padding: 5px;
   margin-top: 5px;
@@ -258,7 +255,6 @@ nav a {
   width: 200px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 255, 0.3);
-
 }
 .navbar {
   /*position: fixed;*/
@@ -270,8 +266,7 @@ nav a {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
   font-weight: bold;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .navbar__logo {
@@ -281,18 +276,15 @@ nav a {
   text-decoration: none;
 }
 
-
 .navbar__links {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  
 }
 
 .navbar__links li {
   margin-right: 20px;
-  
 }
 
 .navbar__links li:last-child {
@@ -310,7 +302,6 @@ nav a {
   background-color: var(--primary-color);
   color: white;
   border-radius: 5px;
-
 }
 
 .navbar__logout {
@@ -327,7 +318,7 @@ nav a {
   background-color: #0066cc;
 }
 
-.activeClassName:active{
+.activeClassName:active {
   background-color: #0066cc;
 }
 /* ---------------------------------------------------- */
@@ -336,7 +327,7 @@ nav a {
   width: 500px;
   margin: 20px;
 }
-.labo-div{
+.labo-div {
   display: flex;
   justify-content: space-between;
 }
@@ -356,13 +347,14 @@ nav a {
   margin-bottom: 20px;
   padding: 10px;
   /* background-color: #f2f2f2; */
+  background-color: aliceblue;
   border-radius: 5px;
-  border: 1px solid var(--primary-color);
-
+  /* border: 1px solid var(--primary-color); */
 }
 
 .user-list li:hover {
-  background-color: #e6e6e6;
+  background-color: rgb(204, 195, 255);
+  box-shadow: 0 2px 4px rgb(46, 46, 48);
 }
 
 .user-list .user {
@@ -386,7 +378,6 @@ nav a {
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-
 }
 
 .medical-data h2 {
@@ -399,7 +390,7 @@ nav a {
 /*---------------------------------------------*/
 .filter-bar {
   margin: 10px;
-  display:grid;
+  display: grid;
   align-items: center;
   width: 200px;
   height: 400px;
@@ -420,7 +411,7 @@ nav a {
   margin-right: 10px;
   margin-bottom: 10px;
 }
-.login-button{
+.login-button {
   background-color: #0077ff;
   color: white;
   border: none;

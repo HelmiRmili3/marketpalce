@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-//import { useAuth } from "../../../../Contexts/authContext";
+// import pinataSDK from '@pinata/sdk';
 import { SHA256 } from "crypto-js";
 import { useAdmin } from "../../../../Contexts/adminContext";
 import Users from "../users/users";
-
+// const pinata = pinataSDK('6e52dfaf71240c1cb8a5');
 export default function Laboratorys() {
   const { laboratorys, fetchLaboratorys } = useAdmin();
+
+  
   return (
     <>
       <div className="labo-div">
@@ -28,6 +30,21 @@ const SignUpFormLaboratory = () => {
   const [passwordOne, setPasswordOne] = useState("");
   const [passwordTow, setPasswordTow] = useState("");
   const [address, setAddress] = useState("");
+
+
+
+  // const uploadFileToPinata = async () => {
+  //   const file = "";// Your file object or data
+  //   try {
+  //     const result = await pinata.pinFileToIPFS(file);
+  //     console.log('File uploaded successfully:', result.IpfsHash);
+  //   } catch (error) {
+  //     console.error('Error uploading file:', error);
+  //   }
+  // };
+  
+  // uploadFileToPinata();
+
 
   const handleNomChange = (event) => {
     setNom(event.target.value);

@@ -59,9 +59,9 @@ const AlertDialog = ({ handlePurchase, nftselected, totalPrice }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Reject</Button>
           <Button onClick={handelAgree} autoFocus>
-            Agree
+            Confirme
           </Button>
         </DialogActions>
       </Dialog>

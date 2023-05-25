@@ -10,18 +10,20 @@ const User = ({ user, role }) => {
     disableLab,
     enableLab,
   } = useAdmin();
-  const [userState, setUserstate] = useState();
+  const [userState, setUserstate] = useState(false);
   const handleEnableDisable = async () => {
     if (role === "laboratory") {
       if (userState) {
         await disableLab(user.wallet);
         fetchStateLab(user.wallet).then(
-          (result) => setUserstate(result) // Update the state with the resolved value
+          (result) => setUserstate(result)
+          // Update the state with the resolved value
         );
       } else {
         await enableLab(user.wallet);
         fetchStateLab(user.wallet).then(
-          (result) => setUserstate(result) // Update the state with the resolved value
+          (result) => setUserstate(result)
+          // Update the state with the resolved value
         );
       }
     }
@@ -39,11 +41,13 @@ const User = ({ user, role }) => {
       }
     }
   };
-
   useEffect(() => {
-    fetchStatePatients(user.wallet).then(
-      (result) => setUserstate(result) // Update the state with the resolved value
-    );
+    if (role === "patient") {
+      fetchStatePatients(user.wallet).then((result) => setUserstate(result));
+    }
+    if (role === "laboratory") {
+      fetchStateLab(user.wallet).then((result) => setUserstate(result));
+    }
   });
   return (
     <>
@@ -64,7 +68,7 @@ const User = ({ user, role }) => {
         <div className="value">{user.wallet}</div>
       </div>
       <div className="user">
-        <div className="property">State:</div>
+        <div className="property">Status:</div>
         <div className="value">
           {!userState ? (
             <div className="online"></div>
@@ -75,7 +79,7 @@ const User = ({ user, role }) => {
       </div>
       <div className="user">
         <button className="state-button" onClick={handleEnableDisable}>
-          {userState ? "Enabled" : "Disabled"}
+          {userState ? "Enable" : "Disable"}
         </button>
       </div>
     </>

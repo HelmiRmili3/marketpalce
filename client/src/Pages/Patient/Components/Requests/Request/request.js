@@ -51,9 +51,9 @@ const Request = ({ request }) => {
       setStatus("Accepted payment");
     }
   });
-
-  const date = new Date(request.date * 1000);
-  const formattedDate = date.toLocaleDateString();
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+  console.log(parseInt(currentTimestamp));
+  const date = new Date((currentTimestamp + parseInt(request.period)) * 1000);
   const handelOpen = () => {
     setOpen(!open);
   };
@@ -62,7 +62,7 @@ const Request = ({ request }) => {
       <div className="order-item">
         <div className="order-id">{parseInt(request.id) + 1}</div>
         <div className="order-address">{request.seller}</div>
-        <div className="order-date">{""}</div>
+        {/* <div className="order-date">{formattedDate}</div> */}
         {status === "Buy" ? (
           <Purchase
             request={request}
@@ -80,7 +80,7 @@ const Request = ({ request }) => {
       {open && (
         <div className="see-more">
           Form :{request.buyer} <br />
-          To :{request.seller} <br /> Date :{formattedDate} <br />
+          To :{request.seller} <br /> Date :{date.toUTCString()} <br />
           NFT :{request.ids}
           <br />
         </div>
@@ -97,13 +97,13 @@ const Purchase = ({ request, acceptAndRejectRequests }) => {
         className="buy-button"
         onClick={() => acceptAndRejectRequests(request.id, true)}
       >
-        Accepted
+        Accept
       </button>
       <button
         className="reject-button"
         onClick={() => acceptAndRejectRequests(request.id, false)}
       >
-        Rejected
+        Reject
       </button>
     </>
   );

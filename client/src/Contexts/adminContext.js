@@ -45,10 +45,11 @@ export const AdminProvider = ({ children }) => {
   };
   //lab state
   const fetchStateLab = async (_address) =>
-    await ComposableContract.methods.labs(_address).call();
+    await ComposableContract.methods.labs(_address).call({ from: address });
 
   const fetchStatePatients = async (_address) =>
     await MedicalDataNFTContract.methods.patients(_address).call();
+
   //get patients
   const fetchPatients = async () => {
     if (address) {
@@ -81,11 +82,11 @@ export const AdminProvider = ({ children }) => {
   };
   //enable/disable lab
   const disableLab = async (_address) => {
-    if (_address) {
+    if (_address || address) {
       try {
         const result = await ComposableContract.methods
           .toggleFalse(_address)
-          .send({ from: address });
+          .send({ from: address, gas: 900000 });
         console.log(result);
       } catch (error) {
         console.log(error);
@@ -95,11 +96,11 @@ export const AdminProvider = ({ children }) => {
     }
   };
   const enableLab = async (_address) => {
-    if (_address) {
+    if (_address || address) {
       try {
         const result = await ComposableContract.methods
           .toggleTrue(_address)
-          .send({ from: address });
+          .send({ from: address, gas: 900000 });
         console.log(result);
       } catch (error) {
         console.log(error);
