@@ -52,7 +52,7 @@ const Request = ({ request }) => {
     }
   });
   const currentTimestamp = Math.floor(Date.now() / 1000);
-  console.log(parseInt(currentTimestamp));
+  //console.log(parseInt(currentTimestamp));
   const date = new Date((currentTimestamp + parseInt(request.period)) * 1000);
   const handelOpen = () => {
     setOpen(!open);
@@ -81,7 +81,7 @@ const Request = ({ request }) => {
         <div className="see-more">
           Form :{request.buyer} <br />
           To :{request.seller} <br /> Date :{date.toUTCString()} <br />
-          NFT :{request.ids}
+          NFT :{request.ids.join(",")}
           <br />
         </div>
       )}

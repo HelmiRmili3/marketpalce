@@ -11,17 +11,16 @@ const Web3 = require("web3");
 const web3 = new Web3();
 const AlertDialog = ({ handlePurchase, nftselected, totalPrice }) => {
   const [open, setOpen] = useState(false);
-  const [period, setPeriod] = useState(1);
+  const [period, setPeriod] = useState(10000);
   const [collectionName, setCollectionName] = useState("");
   const ethValue = web3.utils.fromWei(totalPrice.toString(), "ether");
 
   const handlePeriodChange = (e) => {
     setPeriod(e.target.value);
-    console.log(period);
+    //console.log(period);
   };
   const handleCollectionNameChange = (e) => {
     setCollectionName(e.target.value);
-    console.log(collectionName);
   };
   const handleClickOpen = () => {
     setOpen(true);

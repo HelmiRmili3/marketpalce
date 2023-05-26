@@ -83,7 +83,7 @@ const PopupForm = () => {
                   setData(e);
                 }}
                 style={{ width: "50%" }}
-                facingMode="environment"
+                facingmode="environment"
               />
             ) : (
               <>

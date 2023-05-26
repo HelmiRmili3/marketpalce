@@ -2,7 +2,8 @@ import React from "react";
 import "../../../../App.css";
 import { usePatient } from "../../../../Contexts/patientContext";
 export default function Profile() {
-  const {patient} = usePatient();
+  const { patient } = usePatient();
+  //console.log(patient);
   return (
     <>
       <div className="patient-Profile-container">
@@ -18,21 +19,19 @@ export default function Profile() {
           <div className="form-row-component">
             <div className="name-value-container">
               <label className="name-label">Wallet :</label>
-              <div className="address-value">
-                {patient?.wallet}
-              </div>
+              <div className="address-value">{patient?.wallet}</div>
             </div>
           </div>
         </div>
         <div className="form-row">
           <div className="form-row-component">
-            <TextFiledComponent label={"Password"} content={patient?.password} />
+            <TextFiledComponent
+              label={"Password"}
+              content={patient?.password}
+            />
           </div>
           <div className="form-row-component">
-            <TextFiledComponent
-              label={"Email"}
-              content={patient?.email}
-            />
+            <TextFiledComponent label={"Email"} content={patient?.email} />
           </div>
         </div>
       </div>
@@ -49,4 +48,9 @@ function TextFiledComponent({ label, content }) {
       </div>
     </>
   );
+}
+
+function ChangePassword() {
+  
+  return <></>;
 }

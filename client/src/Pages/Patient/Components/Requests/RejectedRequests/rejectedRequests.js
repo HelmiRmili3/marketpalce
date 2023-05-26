@@ -4,7 +4,7 @@ import CustomLabel from "../CostomLabel/costomLabel";
 const RejectedRequests = ({ requests }) => {
   return requests.length > 0 ? (
     <div className="order-list">
-      <CustomLabel label={"Rejected"} />
+      <CustomLabel label={"Waiting"} />
       {requests?.map((request, index) => (
         <Request key={index} request={request} />
       ))}

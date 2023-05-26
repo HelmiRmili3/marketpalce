@@ -4,7 +4,7 @@ import { useLabo } from "../../../../Contexts/laboContext";
 import Collection from "./Components/Collection/collection";
 const Purchased = () => {
   const { collections } = useLabo();
-  console.log(collections);
+  //console.log(collections);
   return (
     <div className="grid-list">
       {collections.map((collection, index) => (

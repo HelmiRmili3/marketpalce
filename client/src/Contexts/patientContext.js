@@ -44,11 +44,11 @@ export const PatientProvider = ({ children }) => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    if (address) {
-      fetchNfts();
-    }
-  }, [address]);
+  // useEffect(() => {
+  //   if (address) {
+  //     fetchNfts();
+  //   }
+  // }, [address]);
 
   // get requests
   const fetchRequests = async () => {
@@ -62,11 +62,7 @@ export const PatientProvider = ({ children }) => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    if (address) {
-      fetchRequests();
-    }
-  }, [address]);
+
 
   // add nfts
   const createNft = async (_name, _price, _data, _birthday, _sexe) => {
@@ -87,13 +83,19 @@ export const PatientProvider = ({ children }) => {
         .rejectAndAcceptRequest(_id, _accept)
         .send({ from: address })
         .then((result) => {
-          console.log("your request is", _accept);
+          fetchRequests();
           console.log(result);
         });
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (address) {
+      fetchNfts();
+      fetchRequests();
+    }
+  }, [address]);
   const value = {
     nfts,
     requests,

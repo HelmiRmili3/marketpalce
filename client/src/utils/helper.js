@@ -10,12 +10,12 @@ export const composeResquests = (
   nfts,
   allNfts
 ) => {
-  console.log(buyerAddress);
-  console.log(period);
-  console.log(nfts);
-  console.log(allNfts);
+  // console.log(buyerAddress);
+  // console.log(period);
+  // console.log(nfts);
+  // console.log(allNfts);
   const nftList = allNfts?.filter((nft) => nfts?.includes(nft.id));
-  console.log("nft list :", nftList);
+  //console.log("nft list :", nftList);
   const requests = {};
   const prices = {};
   nftList?.forEach((nft) => {
@@ -31,8 +31,8 @@ export const composeResquests = (
       prices[nft.owner] += parseInt(nft.price);
     }
   });
-  console.log(requests);
-  console.log(prices);
+  // console.log(requests);
+  // console.log(prices);
   const labRequests = [];
   Object.entries(requests).forEach(([owner, nftList]) => {
     return labRequests.push({

@@ -63,6 +63,7 @@ export const LaboProvider = ({ children }) => {
         .send({ from: address, gas: 967202 });
       console.log("Request sent successfully");
       console.log(response);
+      getRequests();
     } catch (error) {
       console.log(error);
     }
@@ -97,8 +98,12 @@ export const LaboProvider = ({ children }) => {
       const response = await ComposableContract.methods
         .acceptPayment(_id)
         .send({ from: address, value: _price, gas: 900000 });
+
       console.log(response);
       console.log("The request has been accepted");
+      getRequests();
+      getCollections();
+      getAllNFTs();
     } catch (error) {
       console.log(error);
     }
@@ -112,6 +117,7 @@ export const LaboProvider = ({ children }) => {
         .send({ from: address, gas: 900000 });
       console.log(response);
       console.log("The request has been rejected");
+      getRequests();
     } catch (error) {
       console.log(error);
     }
