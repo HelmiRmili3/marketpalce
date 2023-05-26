@@ -1,36 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./PopupForm.css";
-
-import { useNftDatabase } from "../../../../Contexts/NFTdatabase";
 import { usePatient } from "../../../../Contexts/patientContext";
-import AddIcon from '@mui/icons-material/Add';
+import QrScanner from "react-qr-scanner";
+import AddIcon from "@mui/icons-material/Add";
 const PopupForm = () => {
   const { createNft, patient } = usePatient();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("Electrolytes");
   const [price, setPrice] = useState("");
   const [data, setData] = useState("");
-  const [period, setPeriod] = useState("100000000");
-
+  const [period, setPeriod] = useState("86400");
+  const [cameraStream, setCameraStream] = useState(null);
+  const [openCamera, setOpenCamera] = useState(false);
   const handleOpenForm = () => {
     setIsOpen(true);
   };
   const handleCloseForm = () => {
     setIsOpen(false);
   };
+  const handleInputChange = (event) => {
+    setData(event.target.value.text);
+  };
   const handleFormSubmit = (event) => {
+    console.log(name, price, data, patient.birthday, patient.sexe);
     event.preventDefault();
-    createNft(name, price, data, patient.birthday, patient.sexe);
+    const text = toString(data.text);
+    createNft(name, price, text, patient.birthday, patient.sexe);
     setIsOpen(false);
     setPrice("");
     setData("");
-
   };
+  const startScanning = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setCameraStream(stream);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    startScanning();
+    return () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, []);
 
   return (
     <>
       <button className="open-form-button" onClick={handleOpenForm}>
-        <AddIcon/> NFT
+        <AddIcon /> NFT
       </button>
 
       {isOpen && (
@@ -54,11 +75,28 @@ const PopupForm = () => {
               onChange={(event) => setPrice(event.target.value)}
             />
             <h2>Enter the Data:</h2>
+            {openCamera ? (
+              <QrScanner
+                delay={600}
+                onError={(error) => console.log(error)}
+                onScan={(e) => {
+                  setData(e);
+                }}
+                style={{ width: "50%" }}
+                facingMode="environment"
+              />
+            ) : (
+              <>
+                <button onClick={() => setOpenCamera(!openCamera)}>
+                  openCamera
+                </button>
+              </>
+            )}
+
             <input
               type="text"
-              name="data"
-              value={data}
-              onChange={(event) => setData(event.target.value)}
+              value={data?.text}
+              readOnly 
             />
             <h2>Select a Period:</h2>
             <select
@@ -66,20 +104,19 @@ const PopupForm = () => {
               value={period}
               onChange={(event) => setPeriod(event.target.value)}
             >
-              <option value="100000000">5 Days</option>
-              <option value="1000000000">7 Days</option>
-              <option value="10000000000">1 Month</option>
+              <option value="86400">1 Days</option>
+              <option value="604800">7 Days</option>
+              <option value="2592000">30 Days</option>
             </select>
-            <label htmlFor="file">File:</label>
-            <input type="file" id="file" name="file" onChange={() => {}} />
-            <button type="submit" onClick={handleFormSubmit}>
-              Submit
-            </button>
+            <div className="button-container">
+              <button className="close-form-button" onClick={handleFormSubmit}>
+                Add NFT
+              </button>
+              <button className="close-form-button" onClick={handleCloseForm}>
+                Close
+              </button>
+            </div>
           </form>
-
-          <button className="close-form-button" onClick={handleCloseForm}>
-            Close Form
-          </button>
         </div>
       )}
     </>

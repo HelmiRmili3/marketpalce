@@ -39,7 +39,7 @@
     width: 100%;
   }
   
-  .form-container button[type=submit],
+
   .form-container button.close-form-button {
     background-color: #4CAF50;
     color: white;
@@ -48,7 +48,8 @@
     border-radius: 4px;
     cursor: pointer;
     float: right;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin: 0 40px 0 40px;
   }
   
   .form-container button[type=submit]:hover,
@@ -71,4 +72,8 @@
   .open-form-button:hover {
     background-color: #45a049;
   }
-  
+  .button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
