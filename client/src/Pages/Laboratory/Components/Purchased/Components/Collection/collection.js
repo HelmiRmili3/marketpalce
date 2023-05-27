@@ -1,7 +1,6 @@
 import React from "react";
 import DownloadIcon from '@mui/icons-material/Download';
-
-
+import "./collection.css";
 const Collection = ({ collection }) => {
     // const now = new Date();
     // const unixTimestamp = Math.floor(now.getTime() / 1000);
@@ -23,7 +22,7 @@ const Collection = ({ collection }) => {
     //   };
     // }
     // const s = collection.date - unixTimestamp;
-    const defaultEndDate = new Date( collection.date *1000);
+    //const defaultEndDate = new Date( collection.date *1000);
   
     return (
       <div className="grid-list__card">
@@ -33,9 +32,9 @@ const Collection = ({ collection }) => {
           className="grid-list__image"
         />
         <div className="grid-list__info">
-          <h3 className="grid-list__name">Collection: {collection.name}</h3>
-          <h3 className="grid-list__name">NFTs: {collection.nfts.join(' ')}</h3>
-          <p className="grid-list__date">{defaultEndDate.toUTCString()}</p>
+          <h3 className="grid-list__name">Collection: {/*collection.name*/}</h3>
+          <h3 className="grid-list__name">1{/*NFTs:{collection.nfts.join(' ')}*/}</h3>
+          <p className="grid-list__date">12/12/1999{/*defaultEndDate.toUTCString()*/}</p>
         </div>
         <div className="row-button">
           <button className="grid-list__button__seemore" onClick={() => {}}>

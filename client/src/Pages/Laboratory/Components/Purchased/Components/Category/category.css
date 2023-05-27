@@ -1,0 +1,22 @@
+.scroll-container {
+    white-space: nowrap; /* Prevent line breaks for list items */
+    overflow-x:scroll;
+  }
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-list {
+    display: inline-block; /* Ensure the list is displayed in a row */
+    list-style-type: none; /* Remove default list styles */
+    padding: 0;
+    margin: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scroll-list li {
+    display: inline-block; /* Display list items in a row */
+    padding: 10px; /* Adjust spacing as needed */
+  }
+  

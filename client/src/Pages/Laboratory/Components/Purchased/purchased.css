@@ -1,7 +1,14 @@
 .grid-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
-    margin: 1rem;
-  }
-  
+  display: block;
+  grid-gap: 1rem;
+  margin: 1rem;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.collection {
+  margin-top: 1rem;
+  background-color:ghostwhite;
+  border-radius: 20px;
+}
