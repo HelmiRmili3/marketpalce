@@ -227,3 +227,15 @@ export function parseCollection(collections) {
   });
   return result;
 }
+export function parseCategory(collections) {
+  const list = {};
+  collections?.forEach((collection) => {
+    if (collection.name in list) {
+      list[collection.name].push(collection);
+    } else {
+      list[collection.name] = [];
+      list[collection.name].push(collection);
+    }
+  });
+  return list;
+}

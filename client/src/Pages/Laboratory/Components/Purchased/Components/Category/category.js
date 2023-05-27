@@ -3,11 +3,11 @@ import "./category.css";
 import Collection from "../collection/collection";
 const Category = ({ category }) => {
   return (
-    <div class="scroll-container">
-      <ul class="scroll-list">
+    <div className="scroll-container" >
+      <ul className="scroll-list">
         {category.map((collection, index) => (
-          <li>
-            <Collection collection={collection} />
+          <li key={index} >
+            <Collection key={index} collection={collection} />
           </li>
         ))}
       </ul>

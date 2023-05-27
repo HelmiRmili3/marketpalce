@@ -9,6 +9,11 @@
 }
 .collection {
   margin-top: 1rem;
-  background-color:ghostwhite;
+  background-color: ghostwhite;
   border-radius: 20px;
 }
+.category-title {
+  padding-top: 10px;
+  padding-left: 10px;
+  color: blue;
+  }
