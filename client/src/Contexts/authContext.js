@@ -77,10 +77,13 @@ export const AuthProvider = ({ children }) => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     setUser();
   }, [address]);
+  useEffect(()=>{
+    logOut();
+    setChanged(false);
+  },[changed]);
   return (
     <AuthContext.Provider
       value={{

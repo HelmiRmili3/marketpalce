@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+//import emailjs from "@emailjs/browser";
 import "../../../../App.css";
 import { usePatient } from "../../../../Contexts/patientContext";
+import { generateRandomCode } from "../../../../utils/generateCode";
 export default function Profile() {
   const { patient } = usePatient();
-  //console.log(patient);
+  const [code, setCode] = useState();
+  console.log(patient);
+  const sendEmail = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ code: code, email: patient.email }),
+      });
+      console.log(response); // Optional: Handle response if needed
+    } catch (error) {
+      console.error("error", error); // Optional: Handle error if needed
+    }
+  };
+  
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
+  //   const generated = generateRandomCode();
+  //   setCode(generated);
+  //   const emailParams = {
+  //     code: code,
+  //   };
+  //   emailjs
+  //     .send(
+  //       "service_rr8fi2f",
+  //       "template_rb23r3o",
+  //       emailParams,
+  //       "dEOjDvxCQoWi0vVXV"
+  //     )
+  //     .then((result) => {
+  //       console.log(result.text);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.text);
+  //     });
+  // };
+
   return (
     <>
       <div className="patient-Profile-container">
@@ -34,6 +74,9 @@ export default function Profile() {
             <TextFiledComponent label={"Email"} content={patient?.email} />
           </div>
         </div>
+        <div>
+          <button onClick={sendEmail}>sendEmail</button>
+        </div>
       </div>
     </>
   );
@@ -51,6 +94,5 @@ function TextFiledComponent({ label, content }) {
 }
 
 function ChangePassword() {
-  
   return <></>;
 }

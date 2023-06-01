@@ -3,6 +3,7 @@ import {
   Auth0Contract,
   ComposableContract,
   MedicalDataNFTContract,
+  ComposableAddress,
 } from "../utils/contracts";
 import {
   parseNFTS,
@@ -14,7 +15,10 @@ import {
   getAllNFTs,
   getNfts,
 } from "../utils/helper";
-import { useWallet } from "./walletContext";
+import { useWallet } from "../Contexts/walletContext";
+
+import Web3 from "web3";
+const web3 = new Web3("http://localhost:7545");
 const LaboContext = createContext();
 export function useLabo() {
   return useContext(LaboContext);
@@ -92,22 +96,52 @@ export const LaboProvider = ({ children }) => {
     }
   };
 
-  // Accept payment for a request
   const acceptPayment = async (_id, _price) => {
     try {
       const response = await ComposableContract.methods
         .acceptPayment(_id)
-        .send({ from: address, value: _price, gas: 900000 });
-
-      console.log(response);
-      console.log("The request has been accepted");
-      getRequests();
-      getCollections();
-      getAllNFTs();
+        .encodeABI();
+      const transactionObject = {
+        from: address,
+        to: ComposableAddress,
+        data: response,
+        value: _price,
+        gas: "400000",
+      };
+      window.ethereum
+        .request({
+          method: "eth_sendTransaction",
+          params: [transactionObject],
+        })
+        .then((transactionHash) => {
+          console.log("Transaction hash:", transactionHash);
+          getRequests();
+          getCollections();
+          getAllNFTs();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });  
     } catch (error) {
       console.log(error);
     }
   };
+  // Accept payment for a request
+  // const acceptPayment = async (_id, _price) => {
+  //   try {
+  //     const response = await ComposableContract.methods
+  //       .acceptPayment(_id)
+  //       .send({ from: address, value: _price, gas: 900000 });
+
+  //     console.log(response);
+  //     console.log("The request has been accepted");
+  //     getRequests();
+  //     getCollections();
+  //     getAllNFTs();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // Reject payment for a request
   const rejectPayment = async (_id) => {
