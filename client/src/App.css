@@ -321,6 +321,7 @@ form {
 .activeClassName:active {
   background-color: #0066cc;
 }
+
 /* ---------------------------------------------------- */
 .user-list {
   font-family: Arial, sans-serif;
@@ -386,4 +387,13 @@ form {
 
 .medical-data p {
   margin-bottom: 10px;
+}
+.login-button{
+  width: 190px;
+  padding: 5px;
+  background-color: #0077ff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
 }

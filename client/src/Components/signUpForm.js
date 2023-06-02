@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useWallet } from "../Contexts/walletContext";
 import { useAuth } from "../Contexts/authContext";
 import { useNavigate } from "react-router-dom";
-//const bcrypt = require('bcrypt');
 
 const SignUpForm = () => {
   const { address } = useWallet();
