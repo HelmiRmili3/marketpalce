@@ -44,7 +44,7 @@ export default function Nav() {
   };
   return !isLoggedIn ? (
     <nav>
-      <div className="logo">Marketplace</div>
+      <div className="logo">Nexus</div>
       <Bottons/>
     </nav>
   ) : (
