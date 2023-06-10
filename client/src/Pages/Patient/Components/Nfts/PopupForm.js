@@ -3,6 +3,7 @@ import "./PopupForm.css";
 import { usePatient } from "../../../../Contexts/patientContext";
 import QrScanner from "react-qr-scanner";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
 const PopupForm = () => {
   const { createNft, patient } = usePatient();
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,7 @@ const PopupForm = () => {
   const handleInputChange = (event) => {
     setData(event.target.value.text);
   };
+
   const handleFormSubmit = (event) => {
     console.log(name, price, data, patient.birthday, patient.sexe);
     event.preventDefault();
@@ -47,6 +49,19 @@ const PopupForm = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () =>{
+      try {
+          const response = await axios.get('http://172.16.14.28:5000/send');
+          setData(response.data);
+          console.log(data);
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  fetchData();
+  });
 
   return (
     <>
@@ -93,11 +108,7 @@ const PopupForm = () => {
               </>
             )}
 
-            <input
-              type="text"
-              value={data?.text}
-              readOnly 
-            />
+            <input type="text" value={data?.text} readOnly />
             <h2>Select a Period:</h2>
             <select
               name="name"

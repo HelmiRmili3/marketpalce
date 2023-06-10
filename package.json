@@ -2,6 +2,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3",
     "@pinata/sdk": "^1.1.23",
+    "axios": "^1.4.0",
     "crypto": "^1.0.1",
     "react-json-view": "^1.21.3"
   }

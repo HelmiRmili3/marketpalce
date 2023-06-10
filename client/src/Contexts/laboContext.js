@@ -62,6 +62,11 @@ export const LaboProvider = ({ children }) => {
   // Make a collection of requests
   const makeRequest = async (_request) => {
     try {
+      // let gasEstimate =
+      //   await ComposableContract.methods.addBuyRequest.estimateGas(_request, {
+      //     from: address,
+      //   });
+      // console.log("gas for addBuyRequest : ", gasEstimate);
       const response = await ComposableContract.methods
         .addBuyRequest(_request)
         .send({ from: address, gas: 967202 });
@@ -98,6 +103,11 @@ export const LaboProvider = ({ children }) => {
 
   const acceptPayment = async (_id, _price) => {
     try {
+      let gasEstimate =
+        await ComposableContract.methods.acceptPayment.estimateGas(_id, {
+          from: address,
+        });
+      console.log("gas for acceptPayment : ", gasEstimate);
       const response = await ComposableContract.methods
         .acceptPayment(_id)
         .encodeABI();
@@ -121,27 +131,11 @@ export const LaboProvider = ({ children }) => {
         })
         .catch((error) => {
           console.error("Error:", error);
-        });  
+        });
     } catch (error) {
       console.log(error);
     }
   };
-  // Accept payment for a request
-  // const acceptPayment = async (_id, _price) => {
-  //   try {
-  //     const response = await ComposableContract.methods
-  //       .acceptPayment(_id)
-  //       .send({ from: address, value: _price, gas: 900000 });
-
-  //     console.log(response);
-  //     console.log("The request has been accepted");
-  //     getRequests();
-  //     getCollections();
-  //     getAllNFTs();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   // Reject payment for a request
   const rejectPayment = async (_id) => {

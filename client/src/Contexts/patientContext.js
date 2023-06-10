@@ -63,13 +63,22 @@ export const PatientProvider = ({ children }) => {
     }
   };
 
-
   // add nfts
   const createNft = async (_name, _price, _data, _birthday, _sexe) => {
     try {
-      await MedicalDataNFTContract.methods
+      // let gasEstimate = await MedicalDataNFTContract.methods.mint.estimateGas(
+      //   _name,
+      //   _price,
+      //   _data,
+      //   _birthday,
+      //   _sexe,
+      //   { from: address }
+      // );
+      // console.log("gas for mint : ", gasEstimate);
+      let result =  await MedicalDataNFTContract.methods
         .mint(_name, _price, _data, _birthday, _sexe)
         .send({ from: address, gas: 900000 });
+        console.log(result);
       fetchNfts();
     } catch (error) {
       console.log(error);

@@ -1,10 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { parseAdmin, parsePatient, parseLaboratory } from "../utils/helper";
-import {
-  Auth0Contract,
-  ComposableContract,
-  MedicalDataNFTContract,
-} from "../utils/contracts";
+import { Auth0Contract } from "../utils/contracts";
 import { useWallet } from "./walletContext";
 const AuthContext = createContext();
 export function useAuth() {
@@ -69,9 +65,14 @@ export const AuthProvider = ({ children }) => {
   };
   const signUp = async (nom, prenom, email, hashedPassword, sexe, birthday) => {
     try {
+      // let gasEstimate =
+      //   await Auth0Contract.methods.addBuyRequest.estimateGas(nom, prenom, email, hashedPassword, sexe, birthday, {
+      //     from: address,
+      //   });
+      // console.log("gas for createPatient : ", gasEstimate);
       const result = await Auth0Contract.methods
         .createPatient(nom, prenom, email, hashedPassword, sexe, birthday)
-        .send({ from: address, gas: 900000 });
+        .send({ from: address, gas: 400000 });
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -80,10 +81,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     setUser();
   }, [address]);
-  useEffect(()=>{
+  useEffect(() => {
     logOut();
     setChanged(false);
-  },[changed]);
+  }, [changed]);
   return (
     <AuthContext.Provider
       value={{
@@ -91,7 +92,7 @@ export const AuthProvider = ({ children }) => {
         // laboratorys,
         // admins,
         // getUser,
-         address,
+        address,
         // setaddress,
         currentUser,
         // setCurrentUser,

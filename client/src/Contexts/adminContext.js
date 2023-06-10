@@ -26,7 +26,18 @@ export const AdminProvider = ({ children }) => {
   ) => {
     if (address) {
       try {
-        await Auth0Contract.methods
+        // let gasEstimate =
+        //   await Auth0Contract.methods.createLaboratory.estimateGas(
+        //     _name,
+        //     _email,
+        //     _hash,
+        //     _wallet,
+        //     _license,
+        //     _discription,
+        //     { from: address }
+        //   );
+        // console.log("gas for createLaboratory : ", gasEstimate);
+        let result  = await Auth0Contract.methods
           .createLaboratory(
             _name,
             _email,
@@ -36,6 +47,7 @@ export const AdminProvider = ({ children }) => {
             _discription
           )
           .send({ from: address, gas: 900000 });
+          console.log(result);
       } catch (error) {
         console.log(error);
       }
